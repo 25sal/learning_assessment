@@ -151,7 +151,7 @@ def classify_last_warnings(db="elpro.db", insert=False):
             logger.info("category not found"+": "+str(row[5]))
 
 
-def classify_errors(db="elpro.db", query='SELECT * from compilerlogs where type="error"', insert=False, table="errors_class"):
+def classify_errors(db="elpro.db", query='SELECT * from compilerlogs where type="error"', insert=False, table="error_class"):
     conn = sqlite3.connect(db)
     logger.info("DB connected")
 
@@ -232,7 +232,7 @@ def classify_warnings(db="elpro.db", query='SELECT * from compilerlogs where typ
 
 
 if __name__ == "__main__":
-    classify_errors("elprotest.db", insert=True)
-    classify_warnings("elprotest.db", insert=True)
+    classify_errors("postcovid.db", insert=True)
+    classify_warnings("postcovid.db", insert=True)
     # classify_last_errors("elprotest.db", True)
     # classify_last_warnings("elprotest.db", True)

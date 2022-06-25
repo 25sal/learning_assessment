@@ -52,6 +52,7 @@ class ParseGCCOutput:
                 if os.path.isdir(session + "/users/compile"):
                     error_logs = glob.glob(session + "/users/compile/error*")
                     for error_file in error_logs:
+                        print(error_file)
                         compiler_output = cls.parse_errors(error_file)
                         student_id = SQLiteManager.getStudentID(compiler_output.student)
                         if student_id < 0:
@@ -109,5 +110,9 @@ class ParseGCCOutput:
 
 
 if __name__ == "__main__":
+    '''
     shutil.copy("elpro_schema.db", "elprotest.db")
     ParseGCCOutput.parse("/home/salvatore/eclipse-workspace/elpro/data/anonymized", "20", "elprotest.db")
+    '''
+    shutil.copy("elpro_schema.db", "postcovid.db")
+    ParseGCCOutput.parse("data/postcovid", "20", "postcovid.db")
