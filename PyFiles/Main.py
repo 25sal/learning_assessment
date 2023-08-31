@@ -40,20 +40,20 @@ for warning in warnings:
         development_process.update_warnings_array_given_element(development_process, warning)
         dp_array.append(development_process)
 
-print('dp_array_len: ' + str(len(dp_array)))
-for dp in dp_array:
-    print('exam_id: ' + str(dp.student_id) + ' errors: ' + str(dp.errors) + ' warnings: ' + str(dp.warnings))
+# print('dp_array_len: ' + str(len(dp_array)))
+# for dp in dp_array:
+#     print('exam_id: ' + str(dp.student_id) + ' errors: ' + str(dp.errors) + ' warnings: ' + str(dp.warnings))
 
 # * 3) Plot db_array
-plot_errors_dp(dp_array)
-plot_warnings_dp(dp_array)
+# plot_errors_dp(dp_array)
+# plot_warnings_dp(dp_array)
 
 # * 4) Apply KMeans
-# errors_matrix = []
-# for dp in dp_array:
-#     errors_matrix.append(dp.errors)
+errors_matrix = []
+for dp in dp_array:
+    errors_matrix.append(dp.errors)
 
-# my_k_means(errors_matrix)
+my_k_means(errors_matrix)
 
 
 

@@ -21,3 +21,12 @@ class WarningTopics(Enum):
     format = 5
     syntax = 6
     array = 7
+
+class Grades(Enum):
+    OTT = 1
+    DIT = 2
+    BUO = 3
+    DIS = 4
+    SUF = 5
+    INSUF = 6
+

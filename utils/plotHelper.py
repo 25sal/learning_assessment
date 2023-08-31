@@ -27,6 +27,7 @@ def plot_errors_dp(dp_array):
 
     plt.show()
 
+
 def plot_warnings_dp(dp_array):
     dp_warnings_matrix = []
 
