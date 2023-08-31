@@ -5,7 +5,7 @@ class SQLiteManager:
     conn = None
 
     @classmethod
-    def connect(cls, db="elpro.db"):
+    def connect(cls, db="/Users/leobartowski/Documents/Tesi/learning_assessment/db/elpro.db"):
         cls.conn = sqlite3.connect(db)
 
     @classmethod
@@ -91,3 +91,24 @@ class SQLiteManager:
                 i += 1
             except sqlite3.IntegrityError as e:
                 pass
+
+    @classmethod
+    def getErrorsByExam(cls):
+        sql = "SELECT exam, class, COUNT(*) AS numb_of_errors FROM last_croudy_errors_class_csv GROUP BY exam, class;"
+        cur = cls.conn.cursor()
+        cur.execute(sql)
+        elements = cur.fetchall()
+        return elements
+
+    @classmethod
+    def getWarningsByExam(cls):
+        sql = "SELECT exam, class, COUNT(*) AS numb_of_errors FROM last_warning_class_csv GROUP BY exam, class;"
+        cur = cls.conn.cursor()
+        cur.execute(sql)
+        elements = cur.fetchall()
+        return elements
+
+
+# SQLiteManager.connect()
+# SQLiteManager.getErrorsByExam()
+
