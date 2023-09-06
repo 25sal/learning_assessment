@@ -22,6 +22,7 @@ class WarningTopics(Enum):
     syntax = 6
     array = 7
 
+
 class Grades(Enum):
     OTT = 1
     DIT = 2
@@ -29,4 +30,3 @@ class Grades(Enum):
     DIS = 4
     SUF = 5
     INSUF = 6
-

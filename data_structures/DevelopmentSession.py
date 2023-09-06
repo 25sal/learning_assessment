@@ -1,8 +1,7 @@
+class DevelopmentSession:
 
-class DevelopmentProcess:
-
-    def __init__(self, student_id):
-        self.student_id = student_id
+    def __init__(self, exam_id):
+        self.exam_id = exam_id
         # declaration, conflict, incompatibility, assignment, initialization, parameters, syntax, array / struct
         self.errors = [0, 0, 0, 0, 0, 0, 0, 0]
         # conflict, pointers, cast, scope, conversion, format, syntax, array / struct,
@@ -19,6 +18,3 @@ class DevelopmentProcess:
         # ex: [(4667, 0, 1), (4667, 5, 1), (4667, 6, 10),...]
         type_of_warning_index = element[1]
         development_process.warnings[type_of_warning_index] = element[2]
-
-
-

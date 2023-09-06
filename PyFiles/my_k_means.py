@@ -29,20 +29,23 @@ def my_k_means(data):
     #     print(f"Data point {i + 1} belongs to cluster {cluster}")
 
     plot_based_on_features(data_array, cluster_labels, ErrorTopics.declarations, ErrorTopics.array)
+    plot_based_on_features(data_array, cluster_labels, ErrorTopics.parameters, ErrorTopics.syntax)
+    plot_based_on_features(data_array, cluster_labels, ErrorTopics.assignment, ErrorTopics.initialization)
 
 
 def plot_based_on_features(data_array, cluster_labels,
                            feature_1=ErrorTopics.declarations,
                            feature_2=ErrorTopics.array,
-                           num_clusters=6, ):
+                           num_clusters=6
+                           ):
     plt.figure(figsize=(8, 6))
 
     # Create a scatter plot for each cluster
     for cluster_idx in range(num_clusters):
         cluster_points = data_array[cluster_labels == cluster_idx]
 
-        plt.scatter(cluster_points[:, ErrorTopics.declarations.value],
-                    cluster_points[:, ErrorTopics.array.value],
+        plt.scatter(cluster_points[:, feature_1.value],
+                    cluster_points[:, feature_2.value],
                     label=f'Cluster: {Grades(cluster_idx + 1).name}')
 
     plt.title('Cluster Visualization')

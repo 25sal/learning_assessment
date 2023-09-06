@@ -5,7 +5,7 @@ class SQLiteManager:
     conn = None
 
     @classmethod
-    def connect(cls, db="/Users/leobartowski/Documents/Tesi/learning_assessment/db/elpro.db"):
+    def connect(cls, db="/Users/leobartowski/Documents/Tesi/learning_assessment_thesis/db/elpro_extended.db"):
         cls.conn = sqlite3.connect(db)
 
     @classmethod
@@ -108,7 +108,14 @@ class SQLiteManager:
         elements = cur.fetchall()
         return elements
 
+    @classmethod
+    def getErrorsByExamWithStudentId(cls):
+        sql = ("SELECT exam, class, studentid, COUNT(*) "
+               "AS numb_of_errors FROM last_error_with_student "
+               "GROUP BY exam, class, studentid;")
+        cur = cls.conn.cursor()
+        cur.execute(sql)
+        elements = cur.fetchall()
+        return elements
 
-# SQLiteManager.connect()
-# SQLiteManager.getErrorsByExam()
 
