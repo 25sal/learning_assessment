@@ -9,7 +9,7 @@ class SQLiteManager:
         cls.conn = sqlite3.connect(db)
 
     @classmethod
-    def getSessionID(cls,  session):
+    def getSessionID(cls, session):
         sql = "SELECT id FROM sessions where date='" + session + "'"
         cur = cls.conn.cursor()
         cur.execute(sql)
@@ -31,7 +31,6 @@ class SQLiteManager:
         else:
             cur.execute(sql, (session, 0))
         return cur.lastrowid
-
 
     @classmethod
     def getStudentID(cls, matr):
@@ -117,5 +116,4 @@ class SQLiteManager:
         cur.execute(sql)
         elements = cur.fetchall()
         return elements
-
 

@@ -21,24 +21,24 @@ errors = SQLiteManager.getErrorsByExam()
 warnings = SQLiteManager.getWarningsByExam()
 
 # * 2) Create dp_array
-dp_array = []
+ds_array = []
 for error in errors:
-    found_dp = next((x for x in dp_array if x.exam_id == error[0]), None)
-    if found_dp:
-        DevelopmentSession.update_errors_array_given_element(found_dp, error)
+    found_ds = next((x for x in ds_array if x.exam_id == error[0]), None)
+    if found_ds:
+        DevelopmentSession.update_errors_array_given_element(found_ds, error)
     else:
         development_process = DevelopmentSession(error[0])
         development_process.update_errors_array_given_element(development_process, error)
-        dp_array.append(development_process)
+        ds_array.append(development_process)
 
 for warning in warnings:
-    found_dp = next((x for x in dp_array if x.exam_id == warning[0]), None)
-    if found_dp:
-        DevelopmentSession.update_warnings_array_given_element(found_dp, warning)
+    found_ds = next((x for x in ds_array if x.exam_id == warning[0]), None)
+    if found_ds:
+        DevelopmentSession.update_warnings_array_given_element(found_ds, warning)
     else:
         development_process = DevelopmentSession(warning[0])
         development_process.update_warnings_array_given_element(development_process, warning)
-        dp_array.append(development_process)
+        ds_array.append(development_process)
 
 # print('dp_array_len: ' + str(len(dp_array)))
 # for dp in dp_array:
@@ -52,9 +52,9 @@ for warning in warnings:
 
 # KMeans Error
 errors_matrix = []
-for dp in dp_array:
+for ds in ds_array:
     # if dp.errors != [0, 0, 0, 0, 0, 0, 0, 0]:
-    errors_matrix.append(dp.errors)
+    errors_matrix.append(ds.errors)
 
 print(len(errors_matrix))
 my_k_means(errors_matrix)
