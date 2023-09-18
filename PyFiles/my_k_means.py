@@ -28,9 +28,9 @@ def my_k_means(data):
     # for i, cluster in enumerate(cluster_labels):
     #     print(f"Data point {i + 1} belongs to cluster {cluster}")
 
-    plot_based_on_features(data_array, cluster_labels, ErrorTopics.declarations, ErrorTopics.array)
-    plot_based_on_features(data_array, cluster_labels, ErrorTopics.parameters, ErrorTopics.syntax)
-    plot_based_on_features(data_array, cluster_labels, ErrorTopics.assignment, ErrorTopics.initialization)
+    plot_based_on_features(data_array, cluster_labels, ErrorTopics.declarations, ErrorTopics.syntax)
+    # plot_based_on_features(data_array, cluster_labels, ErrorTopics.parameters, ErrorTopics.syntax)
+    # plot_based_on_features(data_array, cluster_labels, ErrorTopics.assignment, ErrorTopics.initialization)
 
 
 def plot_based_on_features(data_array, cluster_labels,

@@ -1,3 +1,4 @@
+import matplotlib.pyplot as plt
 from PyFiles.my_k_means import my_k_means
 from data_structures.DevelopmentProcess import DevelopmentProcess
 from data_structures.DevelopmentSession import DevelopmentSession
@@ -24,7 +25,6 @@ for error in errors:
 
 
 # Ho creato i development session come prima, ora li vado a raggruppare per student_id
-test_var = 0
 for ds in ds_array:
     found_dp = next((x for x in dp_array if x.student_id == ds.student_id), None)
     if found_dp:
@@ -40,4 +40,9 @@ for ds in ds_array:
 #     for ds in dp.development_sessions:
 #         print('Student Id: ' + str(ds.student_id) + ' exam_id:' + str(ds.exam_id) + ' Errors: ' + str(ds.errors))
 
+for dp in dp_array:
+    if len(dp.development_sessions) > 1:
+        for index, ds in enumerate(dp.development_sessions):
+            plt.plot(ds.errors, label=f'Development Session {index}')
+        plt.show()
 

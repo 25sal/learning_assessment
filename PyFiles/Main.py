@@ -40,9 +40,9 @@ for warning in warnings:
         development_process.update_warnings_array_given_element(development_process, warning)
         ds_array.append(development_process)
 
-# print('dp_array_len: ' + str(len(dp_array)))
-# for dp in dp_array:
-#     print('exam_id: ' + str(dp.student_id) + ' errors: ' + str(dp.errors) + ' warnings: ' + str(dp.warnings))
+print('dp_array_len: ' + str(len(ds_array)))
+for dp in ds_array:
+    print('exam_id: ' + str(dp.student_id) + ' errors: ' + str(dp.errors) + ' warnings: ' + str(dp.warnings))
 
 # * 3) Plot db_array
 # plot_errors_dp(dp_array)
