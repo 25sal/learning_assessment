@@ -31,18 +31,21 @@ for error in errors:
         development_process.update_errors_array_given_element(development_process, error)
         ds_array.append(development_process)
 
-for warning in warnings:
-    found_ds = next((x for x in ds_array if x.exam_id == warning[0]), None)
-    if found_ds:
-        DevelopmentSession.update_warnings_array_given_element(found_ds, warning)
-    else:
-        development_process = DevelopmentSession(warning[0])
-        development_process.update_warnings_array_given_element(development_process, warning)
-        ds_array.append(development_process)
+# for warning in warnings:
+#     found_ds = next((x for x in ds_array if x.exam_id == warning[0]), None)
+#     if found_ds:
+#         DevelopmentSession.update_warnings_array_given_element(found_ds, warning)
+#     else:
+#         development_process = DevelopmentSession(warning[0])
+#         development_process.update_warnings_array_given_element(development_process, warning)
+#         ds_array.append(development_process)
 
-print('dp_array_len: ' + str(len(ds_array)))
-for dp in ds_array:
-    print('exam_id: ' + str(dp.student_id) + ' errors: ' + str(dp.errors) + ' warnings: ' + str(dp.warnings))
+for ds in ds_array:
+    ds.normalize_errors()
+    print('exam_id: ' + str(ds.exam_id) +
+          '-errors: ' + str(ds.errors) +
+          '-norm_errors: ' + str(ds.normalized_errors) +
+          '-lines: ' + str(ds.lines))
 
 # * 3) Plot db_array
 # plot_errors_dp(dp_array)
@@ -52,12 +55,14 @@ for dp in ds_array:
 
 # KMeans Error
 errors_matrix = []
+normalized_errors_matrix = []
 for ds in ds_array:
     # if dp.errors != [0, 0, 0, 0, 0, 0, 0, 0]:
     errors_matrix.append(ds.errors)
+    normalized_errors_matrix.append(ds.normalized_errors)
 
-print(len(errors_matrix))
-my_k_means(errors_matrix)
+# my_k_means(errors_matrix)
+my_k_means(normalized_errors_matrix)
 
 # KMeans Warning
 # warnings_matrix = []

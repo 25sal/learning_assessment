@@ -28,9 +28,40 @@ def my_k_means(data):
     # for i, cluster in enumerate(cluster_labels):
     #     print(f"Data point {i + 1} belongs to cluster {cluster}")
 
-    plot_based_on_features(data_array, cluster_labels, ErrorTopics.declarations, ErrorTopics.syntax)
-    # plot_based_on_features(data_array, cluster_labels, ErrorTopics.parameters, ErrorTopics.syntax)
+    # plot_based_on_features(data_array, cluster_labels, ErrorTopics.declarations, ErrorTopics.conflict)
+    # plot_based_on_features(data_array, cluster_labels, ErrorTopics.declarations, ErrorTopics.incompatibility)
+    # plot_based_on_features(data_array, cluster_labels, ErrorTopics.declarations, ErrorTopics.assignment)
+    # plot_based_on_features(data_array, cluster_labels, ErrorTopics.declarations, ErrorTopics.initialization)
+    # plot_based_on_features(data_array, cluster_labels, ErrorTopics.declarations, ErrorTopics.parameters)
+    # plot_based_on_features(data_array, cluster_labels, ErrorTopics.declarations, ErrorTopics.syntax)
+    # plot_based_on_features(data_array, cluster_labels, ErrorTopics.declarations, ErrorTopics.array)
+
+    # plot_based_on_features(data_array, cluster_labels, ErrorTopics.conflict, ErrorTopics.incompatibility)
+    # plot_based_on_features(data_array, cluster_labels, ErrorTopics.conflict, ErrorTopics.assignment)
+    # plot_based_on_features(data_array, cluster_labels, ErrorTopics.conflict, ErrorTopics.initialization)
+    # plot_based_on_features(data_array, cluster_labels, ErrorTopics.conflict, ErrorTopics.parameters)
+    # plot_based_on_features(data_array, cluster_labels, ErrorTopics.conflict, ErrorTopics.syntax)
+    # plot_based_on_features(data_array, cluster_labels, ErrorTopics.conflict, ErrorTopics.array)
+
+    # plot_based_on_features(data_array, cluster_labels, ErrorTopics.incompatibility, ErrorTopics.assignment)
+    # plot_based_on_features(data_array, cluster_labels, ErrorTopics.incompatibility, ErrorTopics.initialization)
+    # plot_based_on_features(data_array, cluster_labels, ErrorTopics.incompatibility, ErrorTopics.parameters)
+    # plot_based_on_features(data_array, cluster_labels, ErrorTopics.incompatibility, ErrorTopics.syntax)
+    # plot_based_on_features(data_array, cluster_labels, ErrorTopics.incompatibility, ErrorTopics.array)
+
     # plot_based_on_features(data_array, cluster_labels, ErrorTopics.assignment, ErrorTopics.initialization)
+    # plot_based_on_features(data_array, cluster_labels, ErrorTopics.assignment, ErrorTopics.parameters)
+    # plot_based_on_features(data_array, cluster_labels, ErrorTopics.assignment, ErrorTopics.syntax)
+    # plot_based_on_features(data_array, cluster_labels, ErrorTopics.assignment, ErrorTopics.array)
+
+    # plot_based_on_features(data_array, cluster_labels, ErrorTopics.initialization, ErrorTopics.parameters)
+    # plot_based_on_features(data_array, cluster_labels, ErrorTopics.initialization, ErrorTopics.syntax)
+    # plot_based_on_features(data_array, cluster_labels, ErrorTopics.initialization, ErrorTopics.array)
+
+    # plot_based_on_features(data_array, cluster_labels, ErrorTopics.parameters, ErrorTopics.syntax)
+    # plot_based_on_features(data_array, cluster_labels, ErrorTopics.parameters, ErrorTopics.array)
+
+    # plot_based_on_features(data_array, cluster_labels, ErrorTopics.syntax, ErrorTopics.array)
 
 
 def plot_based_on_features(data_array, cluster_labels,
@@ -46,7 +77,7 @@ def plot_based_on_features(data_array, cluster_labels,
 
         plt.scatter(cluster_points[:, feature_1.value],
                     cluster_points[:, feature_2.value],
-                    label=f'Cluster: {Grades(cluster_idx + 1).name}')
+                    label=f'Cluster: {cluster_idx + 1}')
 
     plt.title('Cluster Visualization')
     plt.xlabel(str(feature_1))
