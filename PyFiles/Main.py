@@ -1,7 +1,7 @@
 from PyFiles.my_k_means import my_k_means
 from data_structures.DevelopmentSession import DevelopmentSession
 from db.sqlite import SQLiteManager
-from utils.plotHelper import plot_errors_dp, plot_warnings_dp
+from utils.plotHelper import plot_errors_ds, plot_warnings_ds
 
 # ! Recap di quello che ho fatto:
 # Utilizzando le query ho creato delle tabelle che mi contassero quanti elementi ogni exam

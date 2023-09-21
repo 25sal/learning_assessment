@@ -63,24 +63,3 @@ def my_k_means(data):
 
     # plot_based_on_features(data_array, cluster_labels, ErrorTopics.syntax, ErrorTopics.array)
 
-
-def plot_based_on_features(data_array, cluster_labels,
-                           feature_1=ErrorTopics.declarations,
-                           feature_2=ErrorTopics.array,
-                           num_clusters=6
-                           ):
-    plt.figure(figsize=(8, 6))
-
-    # Create a scatter plot for each cluster
-    for cluster_idx in range(num_clusters):
-        cluster_points = data_array[cluster_labels == cluster_idx]
-
-        plt.scatter(cluster_points[:, feature_1.value],
-                    cluster_points[:, feature_2.value],
-                    label=f'Cluster: {cluster_idx + 1}')
-
-    plt.title('Cluster Visualization')
-    plt.xlabel(str(feature_1))
-    plt.ylabel(str(feature_2))
-    plt.legend()
-    plt.show()

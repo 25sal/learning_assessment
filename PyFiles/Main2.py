@@ -3,6 +3,7 @@ from PyFiles.my_k_means import my_k_means
 from data_structures.DevelopmentProcess import DevelopmentProcess
 from data_structures.DevelopmentSession import DevelopmentSession
 from db.sqlite import SQLiteManager
+from utils.plotHelper import plot_student_progression
 
 SQLiteManager.connect()
 errors = SQLiteManager.getErrorsByExamWithStudentId()
@@ -34,15 +35,16 @@ for ds in ds_array:
         new_dp.development_sessions.append(ds)
         dp_array.append(new_dp)
 
-
 # for dp in dp_array:
-#     print('Student Id: ' + str(dp.student_id) + 'questi sono i miei development process')
+#     print('Student Id: ' + str(dp.student_id) + ' questi sono i miei development process')
 #     for ds in dp.development_sessions:
 #         print('Student Id: ' + str(ds.student_id) + ' exam_id:' + str(ds.exam_id) + ' Errors: ' + str(ds.errors))
-
+#
 for dp in dp_array:
-    if len(dp.development_sessions) > 1:
-        for index, ds in enumerate(dp.development_sessions):
-            plt.plot(ds.errors, label=f'Development Session {index}')
-        plt.show()
+    if len(dp.development_sessions) > 2:
+        plot_student_progression(dp.development_sessions)
+
+
+# Ho notato che nel database ci sono molte prove replicate, dello stesso studente
+# ma con development sessions identiche
 
