@@ -1,9 +1,8 @@
-import matplotlib.pyplot as plt
-from PyFiles.my_k_means import my_k_means
-from data_structures.DevelopmentProcess import DevelopmentProcess
-from data_structures.DevelopmentSession import DevelopmentSession
+from models.DevelopmentProcess import DevelopmentProcess
+from models.DevelopmentSession import DevelopmentSession
 from db.sqlite import SQLiteManager
 from utils.plotHelper import plot_student_progression
+
 
 SQLiteManager.connect()
 errors = SQLiteManager.getErrorsByExamWithStudentId()

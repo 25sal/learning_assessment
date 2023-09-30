@@ -1,8 +1,8 @@
 import numpy as np
 import matplotlib.pyplot as plt
-from data_structures.DevelopmentProcess import DevelopmentProcess
-from data_structures.DevelopmentSession import DevelopmentSession
-from data_structures.enums import ErrorTopics
+from models.DevelopmentProcess import DevelopmentProcess
+from models.DevelopmentSession import DevelopmentSession
+from models.enums import ErrorTopics
 
 
 def plot_based_on_features(data_array, cluster_labels,

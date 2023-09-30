@@ -13,8 +13,8 @@ from sklearn.tree import export_graphviz
 from subprocess import call
 from sklearn.metrics import silhouette_score
 from yellowbrick.cluster import KElbowVisualizer, SilhouetteVisualizer
-
-from data_structures.enums import ErrorTopics, Grades
+from models.enums import ErrorTopics, Grades
+from utils.plotHelper import plot_based_on_features
 
 
 def my_k_means(data):
@@ -27,7 +27,11 @@ def my_k_means(data):
     # Print cluster assignments
     # for i, cluster in enumerate(cluster_labels):
     #     print(f"Data point {i + 1} belongs to cluster {cluster}")
+    plot(data_array, cluster_labels)
 
+
+def plot(data_array, cluster_labels):
+    print('Plots:')
     # plot_based_on_features(data_array, cluster_labels, ErrorTopics.declarations, ErrorTopics.conflict)
     # plot_based_on_features(data_array, cluster_labels, ErrorTopics.declarations, ErrorTopics.incompatibility)
     # plot_based_on_features(data_array, cluster_labels, ErrorTopics.declarations, ErrorTopics.assignment)

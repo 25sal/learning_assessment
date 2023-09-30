@@ -1,7 +1,6 @@
-from PyFiles.my_k_means import my_k_means
-from data_structures.DevelopmentSession import DevelopmentSession
+from ml.my_k_means import my_k_means
+from models.DevelopmentSession import DevelopmentSession
 from db.sqlite import SQLiteManager
-from utils.plotHelper import plot_errors_ds, plot_warnings_ds
 
 # ! Recap di quello che ho fatto:
 # Utilizzando le query ho creato delle tabelle che mi contassero quanti elementi ogni exam
@@ -15,6 +14,7 @@ from utils.plotHelper import plot_errors_ds, plot_warnings_ds
 # Ragionamento identico per i warning
 # RISULTATO -> Ho un array di dp che hanno nel vettore quello che mi serve, cioè quanti errori e warning
 # e di quale classe sono
+
 # * 1) Connect with Database
 SQLiteManager.connect()
 errors = SQLiteManager.getErrorsByExam()
