@@ -117,3 +117,23 @@ class SQLiteManager:
         elements = cur.fetchall()
         return elements
 
+    @classmethod
+    def getErrorsByCompilation(cls):
+        sql = ("SELECT exam, compilationid, CASE WHEN label = 'declaration' THEN 0 "
+               "WHEN label = 'conflict' THEN 1 "
+               "WHEN label = 'incompatibility' THEN 2 "
+               "WHEN label = 'assignment' THEN 3 "
+               "WHEN label = 'initialization' THEN 4 "
+               "WHEN label = 'parameters' THEN 5 "
+               "WHEN label = 'syntax' THEN 6 "
+               "WHEN label = 'array/struct' THEN 7 "
+               "ELSE label "
+               "END AS class, "
+               "COUNT(*) AS numb_of_errors "
+               "FROM all_logs_class "
+               "WHERE type = 'error' "
+               "GROUP BY compilationid, exam, class;")
+        cur = cls.conn.cursor()
+        cur.execute(sql)
+        elements = cur.fetchall()
+        return elements

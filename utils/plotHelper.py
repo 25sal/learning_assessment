@@ -6,7 +6,7 @@ from models.enums import ErrorTopics
 
 
 def plot_based_on_features(data_array, cluster_labels,
-                           feature_1=ErrorTopics.declarations,
+                           feature_1=ErrorTopics.declaration,
                            feature_2=ErrorTopics.array,
                            num_clusters=6
                            ):
@@ -27,7 +27,7 @@ def plot_based_on_features(data_array, cluster_labels,
     plt.show()
 
 
-def plot_student_progression(ds_array, feature_1=ErrorTopics.declarations, feature_2=ErrorTopics.array):
+def plot_student_progression(ds_array, feature_1=ErrorTopics.declaration, feature_2=ErrorTopics.array):
     errors = []
     exam_ids = []
     for ds in ds_array:

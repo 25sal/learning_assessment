@@ -2,7 +2,7 @@ from enum import Enum
 
 
 class ErrorTopics(Enum):
-    declarations = 0
+    declaration = 0
     conflict = 1
     incompatibility = 2
     assignment = 3
