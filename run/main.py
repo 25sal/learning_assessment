@@ -25,10 +25,10 @@ ds_array = []
 for error in errors:
     found_ds = next((x for x in ds_array if x.exam_id == error[0]), None)
     if found_ds:
-        DevelopmentSession.update_errors_array_given_element(found_ds, error)
+        found_ds.update_errors_array_given_element(error)
     else:
         development_process = DevelopmentSession(error[0])
-        development_process.update_errors_array_given_element(development_process, error)
+        development_process.update_errors_array_given_element(error)
         ds_array.append(development_process)
 
 # for warning in warnings:

@@ -14,10 +14,10 @@ for error in errors:
     # (exam, class, student_id, number_of_errors)
     found_ds = next((x for x in ds_array if x.exam_id == error[0]), None)
     if found_ds:
-        DevelopmentSession.update_errors_array_given_element_with_student_id(found_ds, error)
+        found_ds.update_errors_array_given_element_with_student_id(error)
     else:
         ds = DevelopmentSession(error[0], error[2])
-        ds.update_errors_array_given_element_with_student_id(ds, error)
+        ds.update_errors_array_given_element_with_student_id(error)
         ds_array.append(ds)
 
 # for ds in ds_array:
