@@ -129,6 +129,7 @@ class SQLiteManager:
                "WHEN label = 'array/struct' THEN 7 "
                "ELSE label "
                "END AS class, "
+               "row, "
                "COUNT(*) AS numb_of_errors "
                "FROM all_logs_class "
                "WHERE type = 'error' "

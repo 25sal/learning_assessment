@@ -31,7 +31,7 @@ SELECT exam,
            AS numb_of_errors
 FROM all_logs_class
 WHERE type == 'error'
-GROUP BY compilationid, exam, label
+GROUP BY compilationid, exam, label;
 
 -- uguale a quella di sopra ma con un mapping per trasformare la label nella classe di ErrorTopics
 SELECT exam,
@@ -47,6 +47,7 @@ SELECT exam,
            WHEN label = 'array/struct' THEN 7
            ELSE label -- If none of the enum values match, keep the original label
            END  AS class,
+        row,
        COUNT(*) AS numb_of_errors
 FROM all_logs_class
 WHERE type = 'error'
