@@ -1,6 +1,8 @@
 from ml.my_k_means import my_k_means
 from models.DevelopmentSession import DevelopmentSession
 from db.sqlite import SQLiteManager
+from models.enums import ErrorTopics
+from utils.plotHelper import plot_normalized_errors_and_lines, plot_errors_and_lines
 
 # ! Recap di quello che ho fatto:
 # Utilizzando le query ho creato delle tabelle che mi contassero quanti elementi ogni exam
@@ -42,18 +44,12 @@ for error in errors:
 
 for ds in ds_array:
     ds.normalize_errors()
-    print('exam_id: ' + str(ds.exam_id) +
-          '-errors: ' + str(ds.errors) +
-          '-norm_errors: ' + str(ds.normalized_errors) +
-          '-lines: ' + str(ds.lines))
-
-# * 3) Plot db_array
-# plot_errors_dp(dp_array)
-# plot_warnings_dp(dp_array)
+    # print('exam_id: ' + str(ds.exam_id) +
+    #       '-errors: ' + str(ds.errors) +
+    #       '-norm_errors: ' + str(ds.normalized_errors) +
+    #       '-lines: ' + str(ds.lines))
 
 # * 4) Apply KMeans
-
-# KMeans Error
 errors_matrix = []
 normalized_errors_matrix = []
 for ds in ds_array:
@@ -61,8 +57,15 @@ for ds in ds_array:
     errors_matrix.append(ds.errors)
     normalized_errors_matrix.append(ds.normalized_errors)
 
+# Print relations between number of errors and lines of code, for every kind of error
+for i in range(8):
+    plot_normalized_errors_and_lines(ds_array, ErrorTopics(i))
+    plot_errors_and_lines(ds_array, ErrorTopics(i))
+
+# plot_normalized_errors_and_lines(ds_array)
+
 # my_k_means(errors_matrix)
-my_k_means(normalized_errors_matrix)
+# my_k_means(normalized_errors_matrix)
 
 # KMeans Warning
 # warnings_matrix = []

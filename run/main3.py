@@ -38,7 +38,7 @@ for dp in dpc_array:
         print('Exam_id:' + str(dc.exam_id) + ' Compilation Id: ' + str(dc.compilation_id) + ' lines: ' + str(dc.lines) + ' Errors: ' + str(dc.errors))
 
 
-# for dpc in dpc_array:
-#     if len(dpc.development_compilations) > 2:
-#         plot_student_progression(dpc.development_compilations)
-#
+for dpc in dpc_array:
+    if len(dpc.development_compilations) > 2:
+        plot_student_progression(dpc.development_compilations)
+
