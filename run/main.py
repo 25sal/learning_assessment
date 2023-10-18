@@ -44,10 +44,6 @@ for error in errors:
 
 for ds in ds_array:
     ds.normalize_errors()
-    # print('exam_id: ' + str(ds.exam_id) +
-    #       '-errors: ' + str(ds.errors) +
-    #       '-norm_errors: ' + str(ds.normalized_errors) +
-    #       '-lines: ' + str(ds.lines))
 
 # * 4) Apply KMeans
 errors_matrix = []
@@ -58,13 +54,13 @@ for ds in ds_array:
     normalized_errors_matrix.append(ds.normalized_errors)
 
 # Print relations between number of errors and lines of code, for every kind of error
-for i in range(8):
-    plot_normalized_errors_and_lines(ds_array, ErrorTopics(i))
-    plot_errors_and_lines(ds_array, ErrorTopics(i))
+# for i in range(8):
+#     plot_normalized_errors_and_lines(ds_array, ErrorTopics(i))
+#     plot_errors_and_lines(ds_array, ErrorTopics(i))
 
 # plot_normalized_errors_and_lines(ds_array)
 
-# my_k_means(errors_matrix)
+my_k_means(errors_matrix)
 # my_k_means(normalized_errors_matrix)
 
 # KMeans Warning

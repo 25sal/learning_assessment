@@ -1,7 +1,7 @@
 from models.DevelopmentProcess import DevelopmentProcess
 from models.DevelopmentSession import DevelopmentSession
 from db.sqlite import SQLiteManager
-from utils.plotHelper import plot_student_progression
+from utils.plotHelper import plot_student_progression_two_features
 
 
 SQLiteManager.connect()
@@ -41,7 +41,7 @@ for ds in ds_array:
 #
 for dp in dp_array:
     if len(dp.development_sessions) > 2:
-        plot_student_progression(dp.development_sessions)
+        plot_student_progression_two_features(dp.development_sessions)
 
 
 # Ho notato che nel database ci sono molte prove replicate, dello stesso studente

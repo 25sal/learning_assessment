@@ -1,8 +1,7 @@
 from models.DevelopmentCompilation import DevelopmentCompilation
 from models.DevelopmentCompilationProcess import DevelopmentCompilationProcess
 from db.sqlite import SQLiteManager
-from utils.plotHelper import plot_student_progression
-
+from utils.plotHelper import plot_student_progression_all_features, plot_student_progression_all_features_normalized
 
 SQLiteManager.connect()
 errors = SQLiteManager.getErrorsByCompilation()
@@ -20,25 +19,28 @@ for error in errors:
         dc.update_errors_array(error)
         dc_array.append(dc)
 
+for dc in dc_array:
+    dc.normalize_errors()
+    print(dc.lines)
+
 # for dc in dc_array:
 #     print('Exam_id:' + str(dc.exam_id) + ' Compilation_id:' + str(dc.compilation_id) + ' Errors: ' + str(dc.errors))
 
 for dc in dc_array:
-    found_dp = next((x for x in dpc_array if x.exam_id == dc.exam_id), None)
-    if found_dp:
-        found_dp.development_compilations.append(dc)
+    found_dc = next((x for x in dpc_array if x.exam_id == dc.exam_id), None)
+    if found_dc:
+        found_dc.development_compilations.append(dc)
     else:
-        new_dp = DevelopmentCompilationProcess(dc.exam_id)
-        new_dp.development_compilations.append(dc)
-        dpc_array.append(new_dp)
+        new_dpc = DevelopmentCompilationProcess(dc.exam_id)
+        new_dpc.development_compilations.append(dc)
+        dpc_array.append(new_dpc)
 
-for dp in dpc_array:
-    print('Exam Id: ' + str(dp.exam_id) + ' questi sono i miei development process')
-    for dc in dp.development_compilations:
-        print('Exam_id:' + str(dc.exam_id) + ' Compilation Id: ' + str(dc.compilation_id) + ' lines: ' + str(dc.lines) + ' Errors: ' + str(dc.errors))
+# for dp in dpc_array:
+#     print('Exam Id: ' + str(dp.exam_id) + ' questi sono i miei development process')
+#     for dc in dp.development_compilations:
+#         print('Exam_id:' + str(dc.exam_id) + ' Compilation Id: ' + str(dc.compilation_id) + ' lines: ' + str(dc.lines) + ' Errors: ' + str(dc.errors))
 
 
 for dpc in dpc_array:
-    if len(dpc.development_compilations) > 2:
-        plot_student_progression(dpc.development_compilations)
-
+    plot_student_progression_all_features(dpc.development_compilations, dpc.exam_id)
+    plot_student_progression_all_features_normalized(dpc.development_compilations, dpc.exam_id)
