@@ -29,6 +29,8 @@ class DevelopmentSession:
         self.warnings[type_of_warning_index] = element[2]
 
     def update_errors_with_student_id(self, element):
-        # ex: [(4667, 0, 234, 1), (4667, 5,354, 1), (4667, 6, 234, 10),..] -> (exam, class,student_id, number_of_errors)
-        type_of_error_index = element[1]
-        self.errors[type_of_error_index] = element[3]
+        # ex: [(4667, 0, 234, 5, 1),..] -> (exam, class, student_id, lines, number_of_errors)
+        type_of_error_index = element[1]  # type of error
+        self.errors[type_of_error_index] = element[4]  # number of error of that class
+        if self.lines == 0:
+            self.lines = element[3]

@@ -109,7 +109,7 @@ class SQLiteManager:
 
     @classmethod
     def getErrorsByExamWithStudentId(cls):
-        sql = ("SELECT exam, class, studentid, COUNT(*) "
+        sql = ("SELECT exam, class, studentid, lines, COUNT(*) "
                "AS numb_of_errors FROM last_error_with_student "
                "GROUP BY exam, class, studentid;")
         cur = cls.conn.cursor()

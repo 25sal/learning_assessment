@@ -11,7 +11,7 @@ dp_array = []
 ds_array = []
 
 for error in errors:
-    # (exam, class, student_id, number_of_errors)
+    # (exam, class, student_id, lines, number_of_errors)
     found_ds = next((x for x in ds_array if x.exam_id == error[0]), None)
     if found_ds:
         found_ds.update_errors_with_student_id(error)
@@ -45,12 +45,12 @@ for ds in ds_array:
 #
 
 
-# for dp in dp_array:
-#     if len(dp.development_sessions) > 1:
-        # plot_student_progression_all_features(dp,
-        #                                       "/Users/leobartowski/Documents/Tesi/Plots/ProgressionStudents/AllFeatures/")
-        # plot_student_progression_all_features_normalized(dp,
-        #                                                  "/Users/leobartowski/Documents/Tesi/Plots/ProgressionStudents/AllFeaturesNormalized/")
+for dp in dp_array:
+    if len(dp.development_sessions) > 1:
+        plot_student_progression_all_features(dp,
+                                              "/Users/leobartowski/Documents/Tesi/Plots/ProgressionStudents/AllFeatures/")
+        plot_student_progression_all_features_normalized(dp,
+                                                         "/Users/leobartowski/Documents/Tesi/Plots/ProgressionStudents/AllFeaturesNormalized/")
 
 
 # Ho notato che nel database ci sono molte prove replicate, dello stesso studente
