@@ -1,7 +1,7 @@
 from models.DevelopmentCompilation import DevelopmentCompilation
 from models.DevelopmentCompilationProcess import DevelopmentCompilationProcess
 from db.sqlite import SQLiteManager
-from utils.plotHelper import plot_student_progression_all_features, plot_student_progression_all_features_normalized
+from utils.plotHelper import plot_compilations_all_features, plot_compilations_all_features_normalized
 
 SQLiteManager.connect()
 errors = SQLiteManager.getErrorsByCompilation()
@@ -21,7 +21,6 @@ for error in errors:
 
 for dc in dc_array:
     dc.normalize_errors()
-    print(dc.lines)
 
 # for dc in dc_array:
 #     print('Exam_id:' + str(dc.exam_id) + ' Compilation_id:' + str(dc.compilation_id) + ' Errors: ' + str(dc.errors))
@@ -42,5 +41,5 @@ for dc in dc_array:
 
 
 for dpc in dpc_array:
-    plot_student_progression_all_features(dpc.development_compilations, dpc.exam_id)
-    plot_student_progression_all_features_normalized(dpc.development_compilations, dpc.exam_id)
+    plot_compilations_all_features(dpc.development_compilations, dpc.exam_id, "/Users/leobartowski/Documents/Tesi/Plots/Compilations/AllFeatures/")
+    plot_compilations_all_features_normalized(dpc.development_compilations, dpc.exam_id, "/Users/leobartowski/Documents/Tesi/Plots/Compilations/AllFeaturesNormalized/")

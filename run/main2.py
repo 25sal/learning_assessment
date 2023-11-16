@@ -1,8 +1,8 @@
 from models.DevelopmentProcess import DevelopmentProcess
 from models.DevelopmentSession import DevelopmentSession
 from db.sqlite import SQLiteManager
-from utils.plotHelper import plot_student_progression_two_features
-
+from utils.plotHelper import plot_student_progression_two_features, plot_student_progression_all_features, \
+    plot_student_progression_all_features_normalized
 
 SQLiteManager.connect()
 errors = SQLiteManager.getErrorsByExamWithStudentId()
@@ -24,6 +24,10 @@ for error in errors:
 #     print('Student Id: ' + str(ds.student_id) + ' exam_id:' + str(ds.exam_id) + ' Errors: ' + str(ds.errors))
 
 
+for ds in ds_array:
+    ds.normalize_errors()
+    print(ds.lines)
+
 # Ho creato i development session come prima, ora li vado a raggruppare per student_id
 for ds in ds_array:
     found_dp = next((x for x in dp_array if x.student_id == ds.student_id), None)
@@ -39,9 +43,14 @@ for ds in ds_array:
 #     for ds in dp.development_sessions:
 #         print('Student Id: ' + str(ds.student_id) + ' exam_id:' + str(ds.exam_id) + ' Errors: ' + str(ds.errors))
 #
-for dp in dp_array:
-    if len(dp.development_sessions) > 2:
-        plot_student_progression_two_features(dp.development_sessions, dp.student_id, "")
+
+
+# for dp in dp_array:
+#     if len(dp.development_sessions) > 1:
+        # plot_student_progression_all_features(dp,
+        #                                       "/Users/leobartowski/Documents/Tesi/Plots/ProgressionStudents/AllFeatures/")
+        # plot_student_progression_all_features_normalized(dp,
+        #                                                  "/Users/leobartowski/Documents/Tesi/Plots/ProgressionStudents/AllFeaturesNormalized/")
 
 
 # Ho notato che nel database ci sono molte prove replicate, dello stesso studente

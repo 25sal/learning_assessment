@@ -81,10 +81,10 @@ def plot_student_progression_two_features(ds_array,
                 bbox_inches="tight")
 
 
-def plot_student_progression_all_features(ds_array, exam_id):
+def plot_student_progression_all_features(development_process, path):
     errors = []
     exam_ids = []
-    for ds in ds_array:
+    for ds in development_process.development_sessions:
         exam_ids.append(ds.exam_id)
         errors.append(ds.errors)
 
@@ -102,21 +102,21 @@ def plot_student_progression_all_features(ds_array, exam_id):
     plt.plot(n_exams, errors[:, ErrorType.syntax.value], label=str(ErrorType.syntax))
     plt.plot(n_exams, errors[:, ErrorType.array.value], label=str(ErrorType.array))
     plt.xticks(list(map(int, n_exams)))
-    # plt.xlabel('Exam IDs')
-    plt.ylabel('Value')
-    plt.title('Errors change based on compilations')
+    plt.xlabel('exam id')
+    plt.ylabel('number of errors')
+    plt.title('Errors change based on student progression')
     plt.legend()
     plt.savefig(
-        "/Users/leobartowski/Documents/Tesi/Plots/Compilations/AllFeatures/allFeatures-" + str(exam_id) + '.png',
+        path + 'StudentId-' + str(development_process.student_id) + '.png',
         dpi=300,
         bbox_inches="tight")
     # plt.show()
 
 
-def plot_student_progression_all_features_normalized(ds_array, exam_id):
+def plot_student_progression_all_features_normalized(development_process, path):
     errors = []
     exam_ids = []
-    for ds in ds_array:
+    for ds in development_process.development_sessions:
         exam_ids.append(ds.exam_id)
         errors.append(ds.normalized_errors)
 
@@ -134,13 +134,76 @@ def plot_student_progression_all_features_normalized(ds_array, exam_id):
     plt.plot(n_exams, errors[:, ErrorType.syntax.value], label=str(ErrorType.syntax))
     plt.plot(n_exams, errors[:, ErrorType.array.value], label=str(ErrorType.array))
     plt.xticks(list(map(int, n_exams)))
-    # plt.xlabel('Exam IDs')
-    plt.ylabel('Value')
+    plt.xlabel('exam id')
+    plt.ylabel('numbers of normalized error')
+    plt.title('Normalized errors change based on student progression')
+    plt.legend()
+    plt.savefig(
+        path + 'StudentId-' + str(development_process.student_id) + '.png',
+        dpi=300,
+        bbox_inches="tight")
+    # plt.show()
+
+
+def plot_compilations_all_features(dc_array, exam_id, path):
+    errors = []
+    exam_ids = []
+    for dc in dc_array:
+        exam_ids.append(dc.exam_id)
+        errors.append(dc.errors)
+
+    errors = np.array(errors)
+    n_exams = list(range(len(exam_ids)))
+
+    # Create a line plot
+    plt.figure(figsize=(8, 6))
+    plt.plot(n_exams, errors[:, ErrorType.declaration.value], label=str(ErrorType.declaration))
+    plt.plot(n_exams, errors[:, ErrorType.conflict.value], label=str(ErrorType.conflict))
+    plt.plot(n_exams, errors[:, ErrorType.incompatibility.value], label=str(ErrorType.incompatibility))
+    plt.plot(n_exams, errors[:, ErrorType.assignment.value], label=str(ErrorType.assignment))
+    plt.plot(n_exams, errors[:, ErrorType.initialization.value], label=str(ErrorType.initialization))
+    plt.plot(n_exams, errors[:, ErrorType.parameters.value], label=str(ErrorType.parameters))
+    plt.plot(n_exams, errors[:, ErrorType.syntax.value], label=str(ErrorType.syntax))
+    plt.plot(n_exams, errors[:, ErrorType.array.value], label=str(ErrorType.array))
+    plt.xticks(list(map(int, n_exams)))
+    plt.xlabel('compilation id')
+    plt.ylabel('number of errors')
+    plt.title('Errors change based on compilations')
+    plt.legend()
+    plt.savefig(
+        path + 'ExamId-' + str(exam_id) + '.png',
+        dpi=300,
+        bbox_inches="tight")
+    # plt.show()
+
+
+def plot_compilations_all_features_normalized(dc_array, exam_id, path):
+    errors = []
+    exam_ids = []
+    for dc in dc_array:
+        exam_ids.append(dc.exam_id)
+        errors.append(dc.normalized_errors)
+
+    errors = np.array(errors)
+    n_exams = list(range(len(exam_ids)))
+
+    # Create a line plot
+    plt.figure(figsize=(8, 6))
+    plt.plot(n_exams, errors[:, ErrorType.declaration.value], label=str(ErrorType.declaration))
+    plt.plot(n_exams, errors[:, ErrorType.conflict.value], label=str(ErrorType.conflict))
+    plt.plot(n_exams, errors[:, ErrorType.incompatibility.value], label=str(ErrorType.incompatibility))
+    plt.plot(n_exams, errors[:, ErrorType.assignment.value], label=str(ErrorType.assignment))
+    plt.plot(n_exams, errors[:, ErrorType.initialization.value], label=str(ErrorType.initialization))
+    plt.plot(n_exams, errors[:, ErrorType.parameters.value], label=str(ErrorType.parameters))
+    plt.plot(n_exams, errors[:, ErrorType.syntax.value], label=str(ErrorType.syntax))
+    plt.plot(n_exams, errors[:, ErrorType.array.value], label=str(ErrorType.array))
+    plt.xticks(list(map(int, n_exams)))
+    plt.xlabel('compilation id')
+    plt.ylabel('normalized number of errors')
     plt.title('Normalized errors change based on compilations')
     plt.legend()
     plt.savefig(
-        "/Users/leobartowski/Documents/Tesi/Plots/Compilations/AllFeaturesNormalized/allFeatures-" + str(
-            exam_id) + '.png',
+        path + 'ExamId-' + str(exam_id) + '.png',
         dpi=300,
         bbox_inches="tight")
     # plt.show()
