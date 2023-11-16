@@ -1,4 +1,4 @@
-from models.enums import ErrorTopics
+from models.enums import ErrorType, Grade
 
 
 class DevelopmentCompilation:
@@ -13,6 +13,7 @@ class DevelopmentCompilation:
         self.normalized_errors = []
         # conflict, pointers, cast, scope, conversion, format, syntax, array/struct,
         self.warnings = [0, 0, 0, 0, 0, 0, 0, 0]
+        self.results = Grade.INSUF
 
     def normalize_errors(self):
         for error in self.errors:

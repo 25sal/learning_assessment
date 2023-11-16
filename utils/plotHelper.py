@@ -1,12 +1,14 @@
 import numpy as np
 import matplotlib.pyplot as plt
-from models.enums import ErrorTopics
+from models.enums import ErrorType
 from collections import defaultdict
 
 
-def plot_k_means_based_on_features(data_array, cluster_labels,
-                                   feature_1=ErrorTopics.declaration,
-                                   feature_2=ErrorTopics.array,
+def plot_k_means_based_on_features(data_array,
+                                   cluster_labels,
+                                   path,
+                                   feature_1=ErrorType.declaration,
+                                   feature_2=ErrorType.array,
                                    print_multiplicity=True,
                                    num_clusters=6
                                    ):
@@ -16,13 +18,19 @@ def plot_k_means_based_on_features(data_array, cluster_labels,
     for cluster_idx in range(num_clusters):
         cluster_points = data_array[cluster_labels == cluster_idx]
         colors = ['b', 'g', 'r', 'c', 'm', 'y', 'k']
+        if print_multiplicity:
+            plt.scatter(cluster_points[:, feature_1.value],
+                        cluster_points[:, feature_2.value],
+                        label=f'Cluster: {cluster_idx + 1}',
+                        edgecolors=colors[cluster_idx],
+                        facecolors='none',
+                        )
+        else:
+            plt.scatter(cluster_points[:, feature_1.value],
+                        cluster_points[:, feature_2.value],
+                        label=f'Cluster: {cluster_idx + 1}',
+                        )
 
-        plt.scatter(cluster_points[:, feature_1.value],
-                    cluster_points[:, feature_2.value],
-                    label=f'Cluster: {cluster_idx + 1}',
-                    edgecolors=colors[cluster_idx],
-                    facecolors='none',
-                    )
     if print_multiplicity:
         coord_counts = defaultdict(int)
         for coord, label in zip(data_array, cluster_labels):
@@ -37,14 +45,18 @@ def plot_k_means_based_on_features(data_array, cluster_labels,
     plt.xlabel(str(feature_1))
     plt.ylabel(str(feature_2))
     plt.legend()
-    plt.savefig("/Users/leobartowski/Documents/Tesi/Plots/kMeans/Normalized/" + str(
+    plt.savefig(path + str(
         feature_1) + ' - ' + str(feature_2) + '.png',
                 dpi=300,
                 bbox_inches="tight")
 
 
-def plot_student_progression_two_features(ds_array, exam_id, feature_1=ErrorTopics.declaration,
-                                          feature_2=ErrorTopics.array):
+def plot_student_progression_two_features(ds_array,
+                                          exam_id,
+                                          path,
+                                          feature_1=ErrorType.declaration,
+                                          feature_2=ErrorType.array,
+                                          ):
     errors = []
     exam_ids = []
     for ds in ds_array:
@@ -63,7 +75,7 @@ def plot_student_progression_two_features(ds_array, exam_id, feature_1=ErrorTopi
     plt.ylabel('Value')
     plt.title('Change of ' + str(feature_1) + ' and ' + str(feature_2))
     plt.legend()
-    plt.savefig("/Users/leobartowski/Documents/Tesi/Plots/Compilations/TwoFeatures/" + str(exam_id) + ' - ' + str(
+    plt.savefig(path + str(exam_id) + ' - ' + str(
         feature_1) + ' - ' + str(feature_2) + ' .png',
                 dpi=300,
                 bbox_inches="tight")
@@ -81,14 +93,14 @@ def plot_student_progression_all_features(ds_array, exam_id):
 
     # Create a line plot
     plt.figure(figsize=(8, 6))
-    plt.plot(n_exams, errors[:, ErrorTopics.declaration.value], label=str(ErrorTopics.declaration))
-    plt.plot(n_exams, errors[:, ErrorTopics.conflict.value], label=str(ErrorTopics.conflict))
-    plt.plot(n_exams, errors[:, ErrorTopics.incompatibility.value], label=str(ErrorTopics.incompatibility))
-    plt.plot(n_exams, errors[:, ErrorTopics.assignment.value], label=str(ErrorTopics.assignment))
-    plt.plot(n_exams, errors[:, ErrorTopics.initialization.value], label=str(ErrorTopics.initialization))
-    plt.plot(n_exams, errors[:, ErrorTopics.parameters.value], label=str(ErrorTopics.parameters))
-    plt.plot(n_exams, errors[:, ErrorTopics.syntax.value], label=str(ErrorTopics.syntax))
-    plt.plot(n_exams, errors[:, ErrorTopics.array.value], label=str(ErrorTopics.array))
+    plt.plot(n_exams, errors[:, ErrorType.declaration.value], label=str(ErrorType.declaration))
+    plt.plot(n_exams, errors[:, ErrorType.conflict.value], label=str(ErrorType.conflict))
+    plt.plot(n_exams, errors[:, ErrorType.incompatibility.value], label=str(ErrorType.incompatibility))
+    plt.plot(n_exams, errors[:, ErrorType.assignment.value], label=str(ErrorType.assignment))
+    plt.plot(n_exams, errors[:, ErrorType.initialization.value], label=str(ErrorType.initialization))
+    plt.plot(n_exams, errors[:, ErrorType.parameters.value], label=str(ErrorType.parameters))
+    plt.plot(n_exams, errors[:, ErrorType.syntax.value], label=str(ErrorType.syntax))
+    plt.plot(n_exams, errors[:, ErrorType.array.value], label=str(ErrorType.array))
     plt.xticks(list(map(int, n_exams)))
     # plt.xlabel('Exam IDs')
     plt.ylabel('Value')
@@ -113,14 +125,14 @@ def plot_student_progression_all_features_normalized(ds_array, exam_id):
 
     # Create a line plot
     plt.figure(figsize=(8, 6))
-    plt.plot(n_exams, errors[:, ErrorTopics.declaration.value], label=str(ErrorTopics.declaration))
-    plt.plot(n_exams, errors[:, ErrorTopics.conflict.value], label=str(ErrorTopics.conflict))
-    plt.plot(n_exams, errors[:, ErrorTopics.incompatibility.value], label=str(ErrorTopics.incompatibility))
-    plt.plot(n_exams, errors[:, ErrorTopics.assignment.value], label=str(ErrorTopics.assignment))
-    plt.plot(n_exams, errors[:, ErrorTopics.initialization.value], label=str(ErrorTopics.initialization))
-    plt.plot(n_exams, errors[:, ErrorTopics.parameters.value], label=str(ErrorTopics.parameters))
-    plt.plot(n_exams, errors[:, ErrorTopics.syntax.value], label=str(ErrorTopics.syntax))
-    plt.plot(n_exams, errors[:, ErrorTopics.array.value], label=str(ErrorTopics.array))
+    plt.plot(n_exams, errors[:, ErrorType.declaration.value], label=str(ErrorType.declaration))
+    plt.plot(n_exams, errors[:, ErrorType.conflict.value], label=str(ErrorType.conflict))
+    plt.plot(n_exams, errors[:, ErrorType.incompatibility.value], label=str(ErrorType.incompatibility))
+    plt.plot(n_exams, errors[:, ErrorType.assignment.value], label=str(ErrorType.assignment))
+    plt.plot(n_exams, errors[:, ErrorType.initialization.value], label=str(ErrorType.initialization))
+    plt.plot(n_exams, errors[:, ErrorType.parameters.value], label=str(ErrorType.parameters))
+    plt.plot(n_exams, errors[:, ErrorType.syntax.value], label=str(ErrorType.syntax))
+    plt.plot(n_exams, errors[:, ErrorType.array.value], label=str(ErrorType.array))
     plt.xticks(list(map(int, n_exams)))
     # plt.xlabel('Exam IDs')
     plt.ylabel('Value')
@@ -134,7 +146,7 @@ def plot_student_progression_all_features_normalized(ds_array, exam_id):
     # plt.show()
 
 
-def plot_normalized_errors_and_lines(developer_sessions, feature=ErrorTopics.declaration):
+def plot_normalized_errors_and_lines(developer_sessions, feature=ErrorType.declaration):
     plt.figure(figsize=(8, 6))
     plt.xticks(rotation=90)
     for i in range(len(developer_sessions)):
@@ -147,7 +159,7 @@ def plot_normalized_errors_and_lines(developer_sessions, feature=ErrorTopics.dec
     # plt.show()
 
 
-def plot_errors_and_lines(developer_sessions, feature=ErrorTopics.declaration):
+def plot_errors_and_lines(developer_sessions, feature=ErrorType.declaration):
     plt.figure(figsize=(8, 6))
     plt.xticks(rotation=90)
     for i in range(len(developer_sessions)):

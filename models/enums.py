@@ -1,7 +1,7 @@
 from enum import Enum
 
 
-class ErrorTopics(Enum):
+class ErrorType(Enum):
     declaration = 0
     conflict = 1
     incompatibility = 2
@@ -12,7 +12,7 @@ class ErrorTopics(Enum):
     array = 7
 
 
-class WarningTopics(Enum):
+class WarningType(Enum):
     conflict = 0
     pointers = 1
     cast = 2
@@ -23,7 +23,7 @@ class WarningTopics(Enum):
     array = 7
 
 
-class Grades(Enum):
+class Grade(Enum):
     OTT = 1
     DIT = 2
     BUO = 3

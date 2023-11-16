@@ -1,7 +1,7 @@
 from ml.my_k_means import my_k_means
 from models.DevelopmentSession import DevelopmentSession
 from db.sqlite import SQLiteManager
-from models.enums import ErrorTopics
+from models.enums import ErrorType
 from utils.plotHelper import plot_normalized_errors_and_lines, plot_errors_and_lines
 
 # ! Recap di quello che ho fatto:
@@ -27,10 +27,10 @@ ds_array = []
 for error in errors:
     found_ds = next((x for x in ds_array if x.exam_id == error[0]), None)
     if found_ds:
-        found_ds.update_errors_array_given_element(error)
+        found_ds.update_errors(error)
     else:
         development_process = DevelopmentSession(error[0])
-        development_process.update_errors_array_given_element(error)
+        development_process.update_errors(error)
         ds_array.append(development_process)
 
 # for warning in warnings:
@@ -62,6 +62,8 @@ for ds in ds_array:
 
 my_k_means(errors_matrix)
 # my_k_means(normalized_errors_matrix)
+
+
 
 # KMeans Warning
 # warnings_matrix = []

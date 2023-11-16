@@ -1,6 +1,6 @@
 from sklearn.cluster import KMeans
 import numpy as np
-from models.enums import ErrorTopics, Grades
+from models.enums import ErrorType, Grade
 from utils.plotHelper import plot_k_means_based_on_features
 
 
@@ -17,39 +17,14 @@ def my_k_means(data):
 
 
 def plot(data_array, cluster_labels):
-
-    plot_k_means_based_on_features(data_array, cluster_labels, ErrorTopics.declaration, ErrorTopics.conflict)
-    plot_k_means_based_on_features(data_array, cluster_labels, ErrorTopics.declaration, ErrorTopics.incompatibility)
-    plot_k_means_based_on_features(data_array, cluster_labels, ErrorTopics.declaration, ErrorTopics.assignment)
-    plot_k_means_based_on_features(data_array, cluster_labels, ErrorTopics.declaration, ErrorTopics.initialization)
-    plot_k_means_based_on_features(data_array, cluster_labels, ErrorTopics.declaration, ErrorTopics.parameters)
-    plot_k_means_based_on_features(data_array, cluster_labels, ErrorTopics.declaration, ErrorTopics.syntax)
-    plot_k_means_based_on_features(data_array, cluster_labels, ErrorTopics.declaration, ErrorTopics.array)
-
-    plot_k_means_based_on_features(data_array, cluster_labels, ErrorTopics.conflict, ErrorTopics.incompatibility)
-    plot_k_means_based_on_features(data_array, cluster_labels, ErrorTopics.conflict, ErrorTopics.assignment)
-    plot_k_means_based_on_features(data_array, cluster_labels, ErrorTopics.conflict, ErrorTopics.initialization)
-    plot_k_means_based_on_features(data_array, cluster_labels, ErrorTopics.conflict, ErrorTopics.parameters)
-    plot_k_means_based_on_features(data_array, cluster_labels, ErrorTopics.conflict, ErrorTopics.syntax)
-    plot_k_means_based_on_features(data_array, cluster_labels, ErrorTopics.conflict, ErrorTopics.array)
-
-    plot_k_means_based_on_features(data_array, cluster_labels, ErrorTopics.incompatibility, ErrorTopics.assignment)
-    plot_k_means_based_on_features(data_array, cluster_labels, ErrorTopics.incompatibility, ErrorTopics.initialization)
-    plot_k_means_based_on_features(data_array, cluster_labels, ErrorTopics.incompatibility, ErrorTopics.parameters)
-    plot_k_means_based_on_features(data_array, cluster_labels, ErrorTopics.incompatibility, ErrorTopics.syntax)
-    plot_k_means_based_on_features(data_array, cluster_labels, ErrorTopics.incompatibility, ErrorTopics.array)
-
-    plot_k_means_based_on_features(data_array, cluster_labels, ErrorTopics.assignment, ErrorTopics.initialization)
-    plot_k_means_based_on_features(data_array, cluster_labels, ErrorTopics.assignment, ErrorTopics.parameters)
-    plot_k_means_based_on_features(data_array, cluster_labels, ErrorTopics.assignment, ErrorTopics.syntax)
-    plot_k_means_based_on_features(data_array, cluster_labels, ErrorTopics.assignment, ErrorTopics.array)
-
-    plot_k_means_based_on_features(data_array, cluster_labels, ErrorTopics.initialization, ErrorTopics.parameters)
-    plot_k_means_based_on_features(data_array, cluster_labels, ErrorTopics.initialization, ErrorTopics.syntax)
-    plot_k_means_based_on_features(data_array, cluster_labels, ErrorTopics.initialization, ErrorTopics.array)
-
-    plot_k_means_based_on_features(data_array, cluster_labels, ErrorTopics.parameters, ErrorTopics.syntax)
-    plot_k_means_based_on_features(data_array, cluster_labels, ErrorTopics.parameters, ErrorTopics.array)
-
-    plot_k_means_based_on_features(data_array, cluster_labels, ErrorTopics.syntax, ErrorTopics.array)
-
+    # this double iterate through the category 2 by 2 avoiding replications
+    for i in range(8):
+        for j in range(i + 1, 8):
+            plot_k_means_based_on_features(data_array,
+                                           cluster_labels,
+                                           "/Users/leobartowski/Documents/Tesi/Plots/kMeans/NotNormalized/",
+                                           ErrorType(i),
+                                           ErrorType(j),
+                                           True,
+                                           )
+    # plot_k_means_based_on_features(data_array, cluster_labels, ErrorType.declaration, ErrorType.conflict, False)
