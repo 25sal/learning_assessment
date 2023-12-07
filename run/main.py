@@ -2,7 +2,7 @@ from ml.my_k_means import my_k_means
 from models.DevelopmentSession import DevelopmentSession
 from db.sqlite import SQLiteManager
 from models.enums import ErrorType
-from utils.plotHelper import plot_normalized_errors_and_lines, plot_errors_and_lines
+from utils.plotHelper import plot_radar_all_centroid_same_plot, plot_radar_all_centroid_different_plot
 
 # ! Recap di quello che ho fatto:
 # Utilizzando le query ho creato delle tabelle che mi contassero quanti elementi ogni exam
@@ -60,10 +60,15 @@ for ds in ds_array:
 
 # plot_normalized_errors_and_lines(ds_array)
 
-my_k_means(errors_matrix)
+# m(errors_matrix)
 # my_k_means(normalized_errors_matrix)
 
 
+# plot_radar_all_centroid_same_plot(True)  # Normalized
+# plot_radar_all_centroid_same_plot(False)  # Not Normalized
+
+# plot_radar_all_centroid_different_plot(True)
+plot_radar_all_centroid_different_plot(False)
 
 # KMeans Warning
 # warnings_matrix = []

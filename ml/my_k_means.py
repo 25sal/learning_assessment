@@ -2,6 +2,7 @@ from sklearn.cluster import KMeans
 import numpy as np
 from models.enums import ErrorType, Grade
 from utils.plotHelper import plot_k_means_based_on_features
+import matplotlib.pyplot as plt
 
 
 def my_k_means(data):
@@ -13,7 +14,10 @@ def my_k_means(data):
     # Print cluster assignments
     # for i, cluster in enumerate(cluster_labels):
     #     print(f"Data point {i + 1} belongs to cluster {cluster}")
-    plot(data_array, cluster_labels)
+    # plot(data_array, cluster_labels)
+    # ! If I print and copy the centroids matrix it works, if I pass the centroids from kmeans it does not
+    centroids = kmeans.cluster_centers_
+    # print(centroids)
 
 
 def plot(data_array, cluster_labels):
@@ -27,4 +31,3 @@ def plot(data_array, cluster_labels):
                                            ErrorType(j),
                                            True,
                                            )
-    # plot_k_means_based_on_features(data_array, cluster_labels, ErrorType.declaration, ErrorType.conflict, False)

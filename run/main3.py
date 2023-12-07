@@ -43,3 +43,9 @@ for dc in dc_array:
 for dpc in dpc_array:
     plot_compilations_all_features(dpc.development_compilations, dpc.exam_id, "/Users/leobartowski/Documents/Tesi/Plots/Compilations/AllFeatures/")
     plot_compilations_all_features_normalized(dpc.development_compilations, dpc.exam_id, "/Users/leobartowski/Documents/Tesi/Plots/Compilations/AllFeaturesNormalized/")
+
+
+# fig, ax1 = plt.subplots()
+# ax2 = ax1.twinx()
+# ax1.plot(x, y1, 'g-')
+# ax2.plot(x, y2, 'b-')
