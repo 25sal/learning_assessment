@@ -270,12 +270,56 @@ def plot_compilations_all_features(dc_array, exam_id, path):
     plt.xlabel('compilation id')
     plt.ylabel('number of errors')
     plt.title('Errors change based on compilations')
-    plt.legend()
+    plt.legend(bbox_to_anchor=(0, 1.06, 1, 0.2), loc="lower left",
+                mode="expand", borderaxespad=0, ncol=3)
     plt.savefig(
         path + 'ExamId-' + str(exam_id) + '.png',
         dpi=300,
         bbox_inches="tight")
-    # plt.show()
+
+
+def plot_compilations_all_features_with_lines(dc_array, exam_id, path):
+    errors = []
+    exam_ids = []
+    lines = []
+
+    for dc in dc_array:
+        exam_ids.append(dc.exam_id)
+        errors.append(dc.errors)
+        lines.append(dc.lines)
+    errors = np.array(errors)
+    n_exams = list(range(len(exam_ids)))
+
+    fig, ax1 = plt.subplots(figsize=(8, 6))  # Create the figure with the specified size
+
+    # Create a line plot for errors on the primary axis
+    ax1.plot(n_exams, errors[:, ErrorType.declaration.value], label=str(ErrorType.declaration))
+    ax1.plot(n_exams, errors[:, ErrorType.conflict.value], label=str(ErrorType.conflict))
+    ax1.plot(n_exams, errors[:, ErrorType.incompatibility.value], label=str(ErrorType.incompatibility))
+    ax1.plot(n_exams, errors[:, ErrorType.assignment.value], label=str(ErrorType.assignment))
+    ax1.plot(n_exams, errors[:, ErrorType.initialization.value], label=str(ErrorType.initialization))
+    ax1.plot(n_exams, errors[:, ErrorType.parameters.value], label=str(ErrorType.parameters))
+    ax1.plot(n_exams, errors[:, ErrorType.syntax.value], label=str(ErrorType.syntax))
+    ax1.plot(n_exams, errors[:, ErrorType.array.value], label=str(ErrorType.array))
+
+    # Configure the primary axis
+    ax1.set_xlabel('Compilation ID')
+    ax1.set_ylabel('Number of Errors')
+    ax1.set_title('Errors Change Based on Compilations with lines')
+    ax1.legend(bbox_to_anchor=(0, 1.06, 1, 0.2), loc="lower left",
+                mode="expand", borderaxespad=0, ncol=3)
+
+    # Create a secondary axis sharing the same x-axis with the primary axis
+    ax2 = ax1.twinx()  # Create a twin of the primary axis
+    ax2.plot(n_exams, lines, 'y:', label='Lines')  # Plot the lines data on the secondary axis
+    ax2.set_ylabel('Number of Lines')
+    ax2.legend()
+
+    plt.savefig(
+        path + 'ExamId-' + str(exam_id) + '.png',
+        dpi=300,
+        bbox_inches="tight"
+    )
 
 
 def plot_compilations_all_features_normalized(dc_array, exam_id, path):
@@ -302,7 +346,8 @@ def plot_compilations_all_features_normalized(dc_array, exam_id, path):
     plt.xlabel('compilation id')
     plt.ylabel('normalized number of errors')
     plt.title('Normalized errors change based on compilations')
-    plt.legend()
+    plt.legend(bbox_to_anchor=(0, 1.06, 1, 0.2), loc="lower left",
+                mode="expand", borderaxespad=0, ncol=3)
     plt.savefig(
         path + 'ExamId-' + str(exam_id) + '.png',
         dpi=300,

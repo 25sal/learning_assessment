@@ -1,7 +1,7 @@
 from models.DevelopmentCompilation import DevelopmentCompilation
 from models.DevelopmentCompilationProcess import DevelopmentCompilationProcess
 from db.sqlite import SQLiteManager
-from utils.plotHelper import plot_compilations_all_features, plot_compilations_all_features_normalized
+from utils.plotHelper import plot_compilations_all_features, plot_compilations_all_features_normalized, plot_compilations_all_features_with_lines
 
 SQLiteManager.connect()
 errors = SQLiteManager.getErrorsByCompilation()
@@ -43,9 +43,5 @@ for dc in dc_array:
 for dpc in dpc_array:
     plot_compilations_all_features(dpc.development_compilations, dpc.exam_id, "/Users/leobartowski/Documents/Tesi/Plots/Compilations/AllFeatures/")
     plot_compilations_all_features_normalized(dpc.development_compilations, dpc.exam_id, "/Users/leobartowski/Documents/Tesi/Plots/Compilations/AllFeaturesNormalized/")
+    plot_compilations_all_features_with_lines(dpc.development_compilations, dpc.exam_id, "/Users/leobartowski/Documents/Tesi/Plots/Compilations/AllFeaturesWithLines/")
 
-
-# fig, ax1 = plt.subplots()
-# ax2 = ax1.twinx()
-# ax1.plot(x, y1, 'g-')
-# ax2.plot(x, y2, 'b-')
