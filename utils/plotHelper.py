@@ -1,5 +1,7 @@
 import numpy as np
 import matplotlib.pyplot as plt
+from matplotlib.ticker import MaxNLocator
+
 from models.enums import ErrorType
 from collections import defaultdict
 
@@ -257,7 +259,7 @@ def plot_compilations_all_features(dc_array, exam_id, path):
     n_exams = list(range(len(exam_ids)))
 
     # Create a line plot
-    plt.figure(figsize=(8, 6))
+    fig, ax = plt.subplots(figsize=(8, 6))
     plt.plot(n_exams, errors[:, ErrorType.declaration.value], label=str(ErrorType.declaration))
     plt.plot(n_exams, errors[:, ErrorType.conflict.value], label=str(ErrorType.conflict))
     plt.plot(n_exams, errors[:, ErrorType.incompatibility.value], label=str(ErrorType.incompatibility))
@@ -267,6 +269,7 @@ def plot_compilations_all_features(dc_array, exam_id, path):
     plt.plot(n_exams, errors[:, ErrorType.syntax.value], label=str(ErrorType.syntax))
     plt.plot(n_exams, errors[:, ErrorType.array.value], label=str(ErrorType.array))
     plt.xticks(list(map(int, n_exams)))
+    # ax.xaxis.set_major_locator(plt.AutoLocator())
     plt.xlabel('compilation id')
     plt.ylabel('number of errors')
     plt.title('Errors change based on compilations')
@@ -306,6 +309,7 @@ def plot_compilations_all_features_with_lines(dc_array, exam_id, path):
     ax1.set_xlabel('Compilation ID')
     ax1.set_ylabel('Number of Errors')
     ax1.set_title('Errors Change Based on Compilations with lines')
+    ax1.xaxis.set_major_locator(MaxNLocator(20))
     ax1.legend(bbox_to_anchor=(0, 1.06, 1, 0.2), loc="lower left",
                 mode="expand", borderaxespad=0, ncol=3)
 
@@ -333,7 +337,7 @@ def plot_compilations_all_features_normalized(dc_array, exam_id, path):
     n_exams = list(range(len(exam_ids)))
 
     # Create a line plot
-    plt.figure(figsize=(8, 6))
+    fig, ax = plt.subplots(figsize=(8, 6))
     plt.plot(n_exams, errors[:, ErrorType.declaration.value], label=str(ErrorType.declaration))
     plt.plot(n_exams, errors[:, ErrorType.conflict.value], label=str(ErrorType.conflict))
     plt.plot(n_exams, errors[:, ErrorType.incompatibility.value], label=str(ErrorType.incompatibility))
@@ -343,6 +347,7 @@ def plot_compilations_all_features_normalized(dc_array, exam_id, path):
     plt.plot(n_exams, errors[:, ErrorType.syntax.value], label=str(ErrorType.syntax))
     plt.plot(n_exams, errors[:, ErrorType.array.value], label=str(ErrorType.array))
     plt.xticks(list(map(int, n_exams)))
+    # ax.xaxis.set_major_locator(plt.AutoLocator())
     plt.xlabel('compilation id')
     plt.ylabel('normalized number of errors')
     plt.title('Normalized errors change based on compilations')

@@ -7,17 +7,23 @@ import matplotlib.pyplot as plt
 
 def my_k_means(data):
     data_array = np.array(data)
+    print(len(data_array))
     num_clusters = 6
     kmeans = KMeans(num_clusters, random_state=42)
     # Get cluster assignments for each data point
     cluster_labels = kmeans.fit_predict(data_array)
-    # Print cluster assignments
-    # for i, cluster in enumerate(cluster_labels):
-    #     print(f"Data point {i + 1} belongs to cluster {cluster}")
-    # plot(data_array, cluster_labels)
+
+    # Count the number of points in each cluster
+    cluster_counts = np.bincount(cluster_labels)
+
+    # Print the number of points in each cluster
+    for i, count in enumerate(cluster_counts):
+        percentage = (count / len(data_array)) * 100
+        print(f"Cluster {i+1}: {count} points, " + f"percentuale: {percentage}")
     # ! If I print and copy the centroids matrix it works, if I pass the centroids from kmeans it does not
-    centroids = kmeans.cluster_centers_
-    # print(centroids)
+    # centroids = kmeans.cluster_centers_
+
+    # plot(data_array, cluster_labels)
 
 
 def plot(data_array, cluster_labels):

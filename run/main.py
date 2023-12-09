@@ -60,19 +60,14 @@ for ds in ds_array:
 
 # plot_normalized_errors_and_lines(ds_array)
 
-# m(errors_matrix)
-# my_k_means(normalized_errors_matrix)
+# my_k_means(errors_matrix)
+my_k_means(normalized_errors_matrix)
 
 
 # plot_radar_all_centroid_same_plot(True)  # Normalized
 # plot_radar_all_centroid_same_plot(False)  # Not Normalized
-
-# plot_radar_all_centroid_different_plot(True)
-plot_radar_all_centroid_different_plot(False)
-
-# KMeans Warning
-# warnings_matrix = []
-# for dp in dp_array:
-#     warnings_matrix.append(dp.warnings)
 #
-# my_k_means(warnings_matrix)
+# plot_radar_all_centroid_different_plot(True)
+# plot_radar_all_centroid_different_plot(False)
+
+
