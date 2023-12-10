@@ -4,18 +4,6 @@ from db.sqlite import SQLiteManager
 from models.enums import ErrorType
 from utils.plotHelper import plot_radar_all_centroid_same_plot, plot_radar_all_centroid_different_plot
 
-# ! Recap di quello che ho fatto:
-# Utilizzando le query ho creato delle tabelle che mi contassero quanti elementi ogni exam
-# avesse di una specifica classe (ex. exam_id = 432 ha 10 errori di classe 6)
-# data la struttura dati che mi ritorna sqlite.py [(4667, 0, 1), (4667, 5, 1), (4667, 6, 10),...]
-# sono andato a estrapolare il secondo (classe dell'errore e il terzo elemento (count di quanti sono di quella classe)
-# e ho sovrascritto l' array di tutti 0 che ho creato
-# per poter aggiungere tutti gli errori allo stesso oggetto non credo un nuovo dp per ogni elemento della tabella
-# ma controllo prima se esista un elemento con lo stesso exam_id, in caso positivo sovrascrivo solo
-# quello che mi serve altrimenti creo un nuovo elemento
-# Ragionamento identico per i warning
-# RISULTATO -> Ho un array di dp che hanno nel vettore quello che mi serve, cioè quanti errori e warning
-# e di quale classe sono
 
 # * 1) Connect with Database
 SQLiteManager.connect()
@@ -45,6 +33,7 @@ for error in errors:
 for ds in ds_array:
     ds.normalize_errors()
 
+
 # * 4) Apply KMeans
 errors_matrix = []
 normalized_errors_matrix = []
@@ -61,13 +50,17 @@ for ds in ds_array:
 # plot_normalized_errors_and_lines(ds_array)
 
 # my_k_means(errors_matrix)
-my_k_means(normalized_errors_matrix)
+# my_k_means(normalized_errors_matrix)
 
+# * 5) Plot KMeans Centroids Radar Graphs
 
 # plot_radar_all_centroid_same_plot(True)  # Normalized
 # plot_radar_all_centroid_same_plot(False)  # Not Normalized
 #
 # plot_radar_all_centroid_different_plot(True)
 # plot_radar_all_centroid_different_plot(False)
+
+# * 6) AHP
+
 
 

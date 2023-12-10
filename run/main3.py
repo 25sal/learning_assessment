@@ -34,14 +34,22 @@ for dc in dc_array:
         new_dpc.development_compilations.append(dc)
         dpc_array.append(new_dpc)
 
-# for dp in dpc_array:
-#     print('Exam Id: ' + str(dp.exam_id) + ' questi sono i miei development process')
-#     for dc in dp.development_compilations:
-#         print('Exam_id:' + str(dc.exam_id) + ' Compilation Id: ' + str(dc.compilation_id) + ' lines: ' + str(dc.lines) + ' Errors: ' + str(dc.errors))
 
+n_students = 0
+n_compilations = 0
 
-for dpc in dpc_array:
-    plot_compilations_all_features(dpc.development_compilations, dpc.exam_id, "/Users/leobartowski/Documents/Tesi/Plots/Compilations/AllFeatures/")
-    plot_compilations_all_features_normalized(dpc.development_compilations, dpc.exam_id, "/Users/leobartowski/Documents/Tesi/Plots/Compilations/AllFeaturesNormalized/")
-    plot_compilations_all_features_with_lines(dpc.development_compilations, dpc.exam_id, "/Users/leobartowski/Documents/Tesi/Plots/Compilations/AllFeaturesWithLines/")
+for dp in dpc_array:
+    n_students += 1
+    # print('Exam Id: ' + str(dp.exam_id) + ' questi sono i miei development process')
+    for dc in dp.development_compilations:
+        n_compilations += 1
+        # print('Exam_id:' + str(dc.exam_id) + ' Compilation Id: ' + str(dc.compilation_id) + ' lines: ' + str(dc.lines) + ' Errors: ' + str(dc.errors))
+
+print(f"Number of students: {n_students}")
+print(f"Number of compilations: {n_compilations}")
+
+# for dpc in dpc_array:
+#     plot_compilations_all_features(dpc.development_compilations, dpc.exam_id, "/Users/leobartowski/Documents/Tesi/Plots/Compilations/AllFeatures/")
+#     plot_compilations_all_features_normalized(dpc.development_compilations, dpc.exam_id, "/Users/leobartowski/Documents/Tesi/Plots/Compilations/AllFeaturesNormalized/")
+#     plot_compilations_all_features_with_lines(dpc.development_compilations, dpc.exam_id, "/Users/leobartowski/Documents/Tesi/Plots/Compilations/AllFeaturesWithLines/")
 

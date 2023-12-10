@@ -17,6 +17,7 @@ def my_k_means(data):
     cluster_counts = np.bincount(cluster_labels)
 
     # Print the number of points in each cluster
+
     for i, count in enumerate(cluster_counts):
         percentage = (count / len(data_array)) * 100
         print(f"Cluster {i+1}: {count} points, " + f"percentuale: {percentage}")
