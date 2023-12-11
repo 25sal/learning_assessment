@@ -1,9 +1,10 @@
+import numpy as np
+
 from ml.my_k_means import my_k_means
 from models.DevelopmentSession import DevelopmentSession
 from db.sqlite import SQLiteManager
 from models.enums import ErrorType
-from utils.plotHelper import plot_radar_all_centroid_same_plot, plot_radar_all_centroid_different_plot
-
+from utils.plotHelper import plot_radar_all_centroid_same_plot, plot_radar_all_centroid_different_plot, plot_radar_ahp
 
 # * 1) Connect with Database
 SQLiteManager.connect()
@@ -61,6 +62,16 @@ for ds in ds_array:
 # plot_radar_all_centroid_different_plot(False)
 
 # * 6) AHP
+ahp_weights = np.array([0.15260589, 0.11779767, 0.10946434, 0.14217351, 0.10818229, 0.11779767, 0.15942134, 0.09255729])
+
+for ds in ds_array:
+
+    norm_errors = np.array(ds.normalized_errors)
+    normalized_errors_ahp = norm_errors * ahp_weights
+    plot_radar_ahp(normalized_errors_ahp, ds.exam_id)
+
+
+
 
 
 

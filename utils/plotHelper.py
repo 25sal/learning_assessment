@@ -1,9 +1,33 @@
 import numpy as np
 import matplotlib.pyplot as plt
 from matplotlib.ticker import MaxNLocator
-
 from models.enums import ErrorType
 from collections import defaultdict
+
+
+def plot_radar_ahp(normalized_errors_ahp, exam_id):
+
+    categories = ['declaration', 'conflict', 'incompatibility', 'assignment', 'initialization', 'parameters', 'syntax', 'array']
+
+    num_features = len(categories)
+
+    fig, ax = plt.subplots(figsize=(8, 8), subplot_kw=dict(polar=True))
+    angles = np.linspace(0, 2 * np.pi, num_features, endpoint=False).tolist()
+    normalized_errors_ahp = np.append(normalized_errors_ahp, normalized_errors_ahp[0])
+    angles += angles[:1]
+
+    ax.fill(angles, normalized_errors_ahp, alpha=0.25, color='r')
+    ax.plot(angles, normalized_errors_ahp, label=f'Valutazione esame n: {exam_id}', color='r')
+    ax.set_xticks(angles[:-1])
+    ax.set_xticklabels(categories)
+    ax.yaxis.grid(True)
+
+    plt.legend(bbox_to_anchor=(1.1, 1), borderaxespad=0)
+    plt.title(f'Grafico radar AHP esame {exam_id}')
+    path = '/Users/leobartowski/Documents/Tesi/Plots/RadarAHP/'
+    plt.savefig(path + str(exam_id) + '.png',
+                dpi=300,
+                )
 
 
 def plot_radar_all_centroid_same_plot(normalized):
