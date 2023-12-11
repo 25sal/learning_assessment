@@ -28,3 +28,7 @@ Anche in questo caso ci sono due cartelle: errori normalizzati per righe di codi
 -----------------------------------------------------
 
 **RadarCentroids**: grafici a radar che mostrano i centroidi, sia del kMeans normalizzato che non normalizzato
+
+-----------------------------------------------------
+
+**RadarAHP**: grafici a radar che mostrano la valutazion degli studenti dopo AHP
