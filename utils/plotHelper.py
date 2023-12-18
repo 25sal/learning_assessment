@@ -293,7 +293,7 @@ def plot_compilations_all_features(dc_array, exam_id, path):
     plt.plot(n_exams, errors[:, ErrorType.syntax.value], label=str(ErrorType.syntax))
     plt.plot(n_exams, errors[:, ErrorType.array.value], label=str(ErrorType.array))
     plt.xticks(list(map(int, n_exams)))
-    # ax.xaxis.set_major_locator(plt.AutoLocator())
+    ax.xaxis.set_major_locator(plt.AutoLocator())
     plt.xlabel('compilation id')
     plt.ylabel('number of errors')
     plt.title('Errors change based on compilations')
@@ -314,6 +314,7 @@ def plot_compilations_all_features_with_lines(dc_array, exam_id, path):
         exam_ids.append(dc.exam_id)
         errors.append(dc.errors)
         lines.append(dc.lines)
+
     errors = np.array(errors)
     n_exams = list(range(len(exam_ids)))
 
@@ -333,7 +334,7 @@ def plot_compilations_all_features_with_lines(dc_array, exam_id, path):
     ax1.set_xlabel('Compilation ID')
     ax1.set_ylabel('Number of Errors')
     ax1.set_title('Errors Change Based on Compilations with lines')
-    ax1.xaxis.set_major_locator(MaxNLocator(20))
+    # ax1.xaxis.set_major_locator(MaxNLocator(25))
     ax1.legend(bbox_to_anchor=(0, 1.06, 1, 0.2), loc="lower left",
                 mode="expand", borderaxespad=0, ncol=3)
 

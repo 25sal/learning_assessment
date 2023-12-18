@@ -48,8 +48,10 @@ for dp in dpc_array:
 print(f"Number of students: {n_students}")
 print(f"Number of compilations: {n_compilations}")
 
-# for dpc in dpc_array:
-#     plot_compilations_all_features(dpc.development_compilations, dpc.exam_id, "/Users/leobartowski/Documents/Tesi/Plots/Compilations/AllFeatures/")
-#     plot_compilations_all_features_normalized(dpc.development_compilations, dpc.exam_id, "/Users/leobartowski/Documents/Tesi/Plots/Compilations/AllFeaturesNormalized/")
-#     plot_compilations_all_features_with_lines(dpc.development_compilations, dpc.exam_id, "/Users/leobartowski/Documents/Tesi/Plots/Compilations/AllFeaturesWithLines/")
+for dpc in dpc_array:
+    if dpc.exam_id == 963 or dpc.exam_id == 870:
+
+#   plot_compilations_all_features(dpc.development_compilations, dpc.exam_id, "/Users/leobartowski/Documents/Tesi/Plots/Compilations/AllFeatures/")
+#   plot_compilations_all_features_normalized(dpc.development_compilations, dpc.exam_id, "/Users/leobartowski/Documents/Tesi/Plots/Compilations/AllFeaturesNormalized/")
+        plot_compilations_all_features_with_lines(dpc.development_compilations, dpc.exam_id, "/Users/leobartowski/Documents/Tesi/Plots/Compilations/AllFeaturesWithLines/")
 
