@@ -81,9 +81,10 @@ def plot_radar_all_centroid_same_plot(normalized):
     plt.show()
 
 
-def plot_radar_all_centroid_different_plot(normalized):
+def plot_radar_all_centroid_different_plot(centroids,normalized, img_path):
 
     labels = ['declaration', 'conflict', 'incompatibility', 'assignment', 'initialization', 'parameters', 'syntax', 'array']
+    '''
     centroids_not_normalized = [
         [4.28571429e-01, 1.53846154e-01, 1.20879121e-01, 6.59340659e-02, 2.19780220e-02, 8.79120879e-02, 1.37362637e+00, 3.62637363e-01],
         [2.50000000e+00, 1.00000000e-01, 0.00000000e+00, -1.38777878e-17, -3.46944695e-18, 1.00000000e-01, 1.52000000e+01, 6.00000000e-01],
@@ -92,6 +93,8 @@ def plot_radar_all_centroid_different_plot(normalized):
         [0.00000000e+00, 2.77555756e-17, 3.33333333e-01, 6.66666667e-01, 0.00000000e+00, 3.33333333e-01, 4.66666667e+00, 8.00000000e+00],
         [0.00000000e+00, 2.77555756e-17, 0.00000000e+00, 0.00000000e+00, 6.66666667e-01, 8.00000000e+00, 8.33333333e+00, 1.11022302e-16]
     ]
+    
+
     centroids_normalized = [
         [8.69330905e-03, 2.01930454e-03, 9.00613183e-04, 1.73472348e-18, 5.74712644e-04, 7.84574346e-03, 1.00228686e-01, 2.45224814e-03],
         [5.19015660e-03, -4.33680869e-19, 0.00000000e+00, 0.00000000e+00, 1.08420217e-19, 8.67361738e-19, 3.46773197e-01, 2.22222222e-03],
@@ -100,32 +103,35 @@ def plot_radar_all_centroid_different_plot(normalized):
         [4.53875919e-03, 6.16879298e-03, 9.49123636e-03, 6.85428564e-03, 6.87285223e-04, 6.56987021e-03, 1.77807740e-02, 9.28546904e-03],
         [2.08892927e-02, 1.61108838e-03, 4.33680869e-19, -4.33680869e-19, 0.00000000e+00, 6.51890482e-04, 2.02253489e-01, 4.15582033e-03]
     ]
-
+    
     centroids = centroids_normalized if normalized else centroids_not_normalized
+    '''
+
     # Number of features/dimensions
     num_features = len(labels)
 
     # Function to create a radar chart
     def plot_radar_chart(ax, values, label, color):
         angles = np.linspace(0, 2 * np.pi, num_features, endpoint=False).tolist()
-        values += values[:1]
-        angles += angles[:1]
-
+        #values += values[:1]
+        #angles += angles[:1]
+        #print(angles)
+        #print(values)
         ax.fill(angles, values, alpha=0.25, color=color)
         ax.plot(angles, values, label=label, color=color)
-        ax.set_xticks(angles[:-1])
+        ax.set_xticks(angles)
         ax.set_xticklabels(labels)
         ax.yaxis.grid(True)
 
     colors = ['b', 'orange', 'g', 'r', 'm', 'brown']
-
+    
     for idx, centroid in enumerate(centroids):
         fig, ax = plt.subplots(figsize=(8, 8), subplot_kw=dict(polar=True))
         plot_radar_chart(ax, centroid, f'Centroid {idx + 1}', colors[idx])
         plt.legend(loc='upper right')
         plt.title(f'Grafico radar del centroide {idx + 1} kMeans')
         folder = 'Normalized/' if normalized else 'NotNormalized/'
-        path = '/Users/leobartowski/Documents/Tesi/Plots/RadarCentroids/'
+        path = img_path+'/RadarCentroids/'
         plt.savefig(path + folder + 'Centroid' + str(idx + 1) + '.png',
                     dpi=300,
                     bbox_inches="tight")

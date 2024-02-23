@@ -5,7 +5,7 @@ class SQLiteManager:
     conn = None
 
     @classmethod
-    def connect(cls, db="/Users/leobartowski/Documents/Tesi/learning_assessment_thesis/db/elpro_extended.db"):
+    def connect(cls, db="db/elpro_extended.db"):
         cls.conn = sqlite3.connect(db)
 
     @classmethod

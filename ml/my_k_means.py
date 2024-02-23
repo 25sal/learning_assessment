@@ -5,10 +5,10 @@ from utils.plotHelper import plot_k_means_based_on_features
 import matplotlib.pyplot as plt
 
 
-def my_k_means(data):
+def my_k_means(data, nclusters):
     data_array = np.array(data)
     print(len(data_array))
-    num_clusters = 6
+    num_clusters = nclusters
     kmeans = KMeans(num_clusters, random_state=42)
     # Get cluster assignments for each data point
     cluster_labels = kmeans.fit_predict(data_array)
@@ -22,8 +22,8 @@ def my_k_means(data):
         percentage = (count / len(data_array)) * 100
         print(f"Cluster {i+1}: {count} points, " + f"percentuale: {percentage}")
     # ! If I print and copy the centroids matrix it works, if I pass the centroids from kmeans it does not
-    # centroids = kmeans.cluster_centers_
-
+    centroids = kmeans.cluster_centers_
+    return(centroids)
     # plot(data_array, cluster_labels)
 
 
