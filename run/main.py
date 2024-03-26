@@ -48,6 +48,7 @@ for ds in ds_array:
 
 labels = ['declaration', 'conflict', 'incompatibility', 'assignment', 'initialization', 'parameters', 'syntax', 'array']
 ds = pd.DataFrame(errors_matrix, columns=labels)
+#ds['total'] = ds.sum(axis=1)
 for label in labels:
     norm = ds[label].max()
     print(label,norm)

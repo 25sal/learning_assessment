@@ -12,6 +12,10 @@ def my_k_means(data, nclusters):
     kmeans = KMeans(num_clusters, random_state=42)
     # Get cluster assignments for each data point
     cluster_labels = kmeans.fit_predict(data_array)
+    total_cluster = np.zeros(num_clusters)
+    for i in range(len(cluster_labels)):
+        total_cluster[cluster_labels[i]] +=data_array[i].sum() 
+    print(total_cluster)
 
     # Count the number of points in each cluster
     cluster_counts = np.bincount(cluster_labels)
