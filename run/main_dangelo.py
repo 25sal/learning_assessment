@@ -97,18 +97,22 @@ norm_centroids = my_k_means(normalized_errors_matrix, 4)
 
 ahp_weights = np.array([0.15260589, 0.11779767, 0.10946434, 0.14217351, 0.10818229, 0.11779767, 0.15942134, 0.09255729])
 
-norm_errors = normalized_errors_matrix[123]
-normalized_errors_ahp = np.array(ds_array[123].normalized_errors) * ahp_weights
-plot_radar_node(normalized_errors_ahp, norm_errors, ds_array[123].exam_id)
+#norm_errors = normalized_errors_matrix[123]
+#normalized_errors_ahp = np.array(ds_array[123].normalized_errors) * ahp_weights
+#plot_radar_node(normalized_errors_ahp, norm_errors, ds_array[123].exam_id)
 
-'''
-for ds in ds_array:
-    print(ds.exam_id)
-    if ds.exam_id in [123,604,748,851,861,1031,1124]:
+with open("ahp_result.csv", "w") as fout:
+    for ds in ds_array:
+        #if ds.exam_id in [123,604,748,851,861,1031,1124]:
         norm_errors = np.array(ds.normalized_errors)
         normalized_errors_ahp = norm_errors * ahp_weights
-        plot_radar_ahp(normalized_errors_ahp, ds.exam_id)
-'''
+        line=str(ds.exam_id)
+        for er in normalized_errors_ahp:
+            line +=","+str(er)
+        line +="\n"
+        fout.writelines(line)
+        #plot_radar_ahp(normalized_errors_ahp, ds.exam_id)
+    
 
 
 
