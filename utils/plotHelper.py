@@ -3,8 +3,34 @@ import matplotlib.pyplot as plt
 from matplotlib.ticker import MaxNLocator
 from models.enums import ErrorType
 from collections import defaultdict
+import matplotlib.ticker as mtick
 
+def plot_radar_node(normalized_errors_ahp, errors, exam_id):
+    categories = ['declaration', 'conflict', 'incompatibility', 'assignment', 'initialization', 'parameters', 'syntax', 'array']
 
+    num_features = len(categories)
+
+    fig, ax = plt.subplots(figsize=(8, 8), subplot_kw=dict(polar=True))
+    angles = np.linspace(0, 2 * np.pi, num_features, endpoint=False).tolist()
+    normalized_errors_ahp = np.append(normalized_errors_ahp, normalized_errors_ahp[0])
+    errors = np.append(errors, errors[0])
+    angles.append(angles[0])
+
+    ax.fill(angles, normalized_errors_ahp, alpha=0.25, color='r')
+    ax.plot(angles, normalized_errors_ahp, label=f'AHP Evaluation: {exam_id}', color='r')
+    ax.fill(angles, errors, alpha=0.25, color='b')
+    ax.plot(angles, errors, label=f'Errors: {exam_id}', color='b')
+
+    ax.set_xticks(angles[:-1])
+    ax.set_xticklabels(categories)
+    ax.yaxis.grid(True)
+
+    plt.legend(bbox_to_anchor=(1.1, 1), borderaxespad=0)
+    plt.title(f'Grafico radar AHP esame {exam_id}')
+    path = 'AHPArticle/Plots/RadarAHP/'
+    plt.savefig(path + str(exam_id) + '.png',
+                dpi=300,
+                )
 def plot_radar_ahp(normalized_errors_ahp, exam_id):
 
     categories = ['declaration', 'conflict', 'incompatibility', 'assignment', 'initialization', 'parameters', 'syntax', 'array']
@@ -57,9 +83,8 @@ def plot_radar_all_centroid_same_plot(normalized):
     # Function to create a radar chart
     def plot_radar_chart(ax, values, label):
         angles = np.linspace(0, 2 * np.pi, num_features, endpoint=False).tolist()
-        values += values[:1]
-        angles += angles[:1]
-
+        #values += values[:1]
+        #angles += angles[:1]
         ax.fill(angles, values, alpha=0.25)
         ax.plot(angles, values, label=label)
         ax.set_xticks(angles[:-1])
@@ -113,23 +138,23 @@ def plot_radar_all_centroid_different_plot(centroids,normalized, img_path):
     # Function to create a radar chart
     def plot_radar_chart(ax, values, label, color):
         angles = np.linspace(0, 2 * np.pi, num_features, endpoint=False).tolist()
-        #values += values[:1]
-        #angles += angles[:1]
-        #print(angles)
-        #print(values)
+        angles.append(angles[0])
+        values=values.tolist()
+        values.append(values[0])
         ax.fill(angles, values, alpha=0.25, color=color)
         ax.plot(angles, values, label=label, color=color)
-        ax.set_xticks(angles)
+        ax.set_xticks(angles[:-1])
         ax.set_xticklabels(labels)
+        ax.set_ylim(bottom=-0.001)
         ax.yaxis.grid(True)
 
-    colors = ['b', 'orange', 'g', 'r', 'm', 'brown']
-    
+    colors = ['b', 'orange', 'g', 'r', 'm', 'brown','k','yellow']
+    plt.rcParams.update({'font.size': 16})
     for idx, centroid in enumerate(centroids):
         fig, ax = plt.subplots(figsize=(8, 8), subplot_kw=dict(polar=True))
         plot_radar_chart(ax, centroid, f'Centroid {idx + 1}', colors[idx])
-        plt.legend(loc='upper right')
-        plt.title(f'Grafico radar del centroide {idx + 1} kMeans')
+        # plt.legend(loc='upper right')
+        # plt.title(f'Grafico radar del centroide {idx + 1} kMeans')
         folder = 'Normalized/' if normalized else 'NotNormalized/'
         path = img_path+'/RadarCentroids/'
         plt.savefig(path + folder + 'Centroid' + str(idx + 1) + '.png',
@@ -416,3 +441,16 @@ def plot_errors_and_lines(developer_sessions, feature=ErrorType.declaration):
     plt.savefig("/Users/leobartowski/Documents/Tesi/Plots/ErrorsAndLines/NotNormalized/" + str(feature) + '.png',
                 dpi=300, bbox_inches="tight")
     # plt.show()
+
+
+def plot_error_class(errors, img_path):
+    plt.figure()
+    fig, ax = plt.subplots(figsize=(8, 7))
+    values = errors.sum().values
+    ax.bar(errors.columns, 100*values/values.sum())
+    ax.yaxis.set_major_formatter(mtick.PercentFormatter())
+    ax.set_ylabel("Class size")
+    ax.set_ylabel("Error class")
+    ax.tick_params(axis='x', labelrotation=45)
+    plt.subplots_adjust(bottom=0.15)
+    plt.savefig(img_path+"/error_plot.png")
