@@ -4,7 +4,7 @@ import numpy as np
 
 jsessionid = "C1B5BD636F4827895D02512534A7032F"
 
-request = "https:esse3.cressi.unicampania.itauthdocenteCalendarioEsamiListaStudentiEsameExcel.xls;jsessionid="+jsessionid+".jvm2b?AA_ID=2015&MIN_AA_CAL_ID=0&CDS_ID=10364&AD_ID=16678&APP_ID=_REPLACEME_&SORT_ORDER=ascending&SORT_CODE=2&gruppo_giud_cod=VOTO_1&AA_CAL_ID=2015&FMT_COGN_NOME=CN&VIEW_DETT_ESACOM=1&VIS_DETT=-100&TV_GRUPPO_VOTO_APP_ID=1&TV_GRUPPO_GIUD_COD=&default_ins_esiti=1&excel=1%0A"
+request = "https://esse3.cressi.unicampania.it/auth/docente/CalendarioEsami/ListaStudentiEsameExcel.xls;jsessionid="+jsessionid+".jvm2b?AA_ID=2015&MIN_AA_CAL_ID=0&CDS_ID=10364&AD_ID=16678&APP_ID=_REPLACEME_&SORT_ORDER=ascending&SORT_CODE=2&gruppo_giud_cod=VOTO_1&AA_CAL_ID=2015&FMT_COGN_NOME=CN&VIEW_DETT_ESACOM=1&VIS_DETT=-100&TV_GRUPPO_VOTO_APP_ID=1&TV_GRUPPO_GIUD_COD=&default_ins_esiti=1&excel=1%0A"
 
 
 
@@ -21,9 +21,9 @@ def extract_APPID():
             
 
 def process_csv_files():
-    csv_files = glob.glob(".dataresults*.utf8")   
+    csv_files = glob.glob("./data/results/*.utf8")   
     for csv_file in csv_files:
-        # print(csv_file)
+        #print(csv_file)
         with open(csv_file, "r") as template:
             lines = template.readlines()
             
@@ -37,7 +37,8 @@ def process_csv_files():
                 if found_matr:
                     tokens = lines[i].split(",")
                     if len(tokens) > 8:
-                        print(tokens[2]+","+tokens[8]+","+exam_date)
+
+                        print(tokens[2]+","+tokens[8]+","+exam_date[-4:]+exam_date[3:5]+exam_date[0:2])
                 if "Matricola" in lines[i]:
                     found_matr = True
                 
